@@ -18,7 +18,7 @@ Arbeitsphasen bleiben möglich; das endgültige Format ist nicht entschieden.
 ## Abhängigkeiten
 
 - A0 diagnostiziert die Grundlagen und bestimmt nötige Unterstützung.
-- A1 baut auf Ausdrucks- und Bindungsverständnis aus A0 auf.
+- A1 baut auf dem Verständnis von Ausdrücken und gespeicherten Variablenwerten aus A0 auf.
 - A2 setzt A1 voraus und entwickelt dessen Ausdrucksmodell weiter.
 - A3 verwendet A2 für Entwurf und Prüfung wertliefernder Funktionen.
 - A4 verbindet A2 und A3 für rekursive Aufrufe und rekursiven Entwurf.
@@ -40,10 +40,10 @@ Modellübergänge nicht überspringen.
 **Voraussetzungen:** Bearbeitete Snap!- und Python-Übersetzungseinheiten,
 ohne daraus individuelle Beherrschung abzuleiten.
 
-**Modellarbeit:** Bekannte Bindungen, Ausgaben, Zweigwahl und Schleifendurchläufe
+**Modellarbeit:** Gespeicherte Variablenwerte, Ausgaben, Zweigwahl und Schleifendurchläufe
 unterscheiden. Noch kein neuer vollständiger Funktionsmechanismus.
 
-**Diagnose:** Für `a = 3; b = a + 1; a = 8` Endbindungen erklären; Zweig und
+**Diagnose:** Für `a = 3; b = a + 1; a = 8` die zuletzt gespeicherten Variablenwerte erklären; Zweig und
 Durchläufe eines kurzen Programms vorhersagen; eine Zeichenschleife auch
 für die leere Zeichenkette verfolgen; `-3 // 2` begründen.
 
@@ -61,7 +61,7 @@ wenn die tatsächliche Erfahrung erhoben wurde.
 
 **Ziele:** EX1–EX3, FU1, FU2, FU4; Einführung von FU6.
 
-**Voraussetzungen:** Ausdrücke und Namensbindungen aus A0; nötige
+**Voraussetzungen:** Ausdrücke und das Speichern und Lesen von Variablenwerten aus A0; nötige
 Rechenoperationen sind gesichert.
 
 **Modellarbeit:** M1 und der bewusst begrenzte reine Teilbereich M2.
@@ -73,14 +73,14 @@ Einen Aufruf mit unbekanntem Namen begründet als fehlerhaft einordnen.
 
 **Aktivität:** Kurzer Modellimpuls, individuelle Reduktionsspur,
 Begründungsvergleich und Übertragung einer reinen Funktion nach Python.
-Erst anschließend Ausführung zur Prüfung.
+Erst anschliessend Ausführung zur Prüfung.
 
-**Evidenz und Anpassung:** Argumente werden vor dem äußeren Rumpf ausgewertet;
+**Evidenz und Anpassung:** Argumente werden vor dem äusseren Rumpf ausgewertet;
 umgebende Rechnungen bleiben erhalten. Bei Verwechslungen zunächst einfache
 Einzelaufrufe nutzen. Der reine Teilbereich muss ausdrücklich benannt werden,
 damit die folgende Erweiterung nicht wie ein Widerspruch erscheint.
 
-## A2 — Python-Aufrufe, lokale Bindungen und Rückkehr
+## A2 — Python-Aufrufe, lokale Variablen und Rückkehr
 
 **Ziele:** FU1, FU3–FU8, EX3; Anwendung von PY1 und PY2.
 
@@ -96,16 +96,16 @@ eine Anweisung nach `return` beurteilen.
 
 **Aktivität:** Minimale Kontrastpaare: `print`/`return`,
 ein/ein weiterer Parameter, gültiger/fehlerhafter Aufruf. Einen Ablauf
-von Hand protokollieren und anschließend mit der verfügbaren Visualisierung
+von Hand protokollieren und anschliessend mit der verfügbaren Visualisierung
 vergleichen. Ein Mehrparameterbeispiel mit beobachtbaren Argumentwirkungen
 prüft die Links-nach-rechts-Reihenfolge.
 
-**Evidenz und Anpassung:** Ausgabe `3`, Rückgabewert `None` und anschließenden
+**Evidenz und Anpassung:** Ausgabe `3`, Rückgabewert `None` und anschliessenden
 `TypeError` getrennt erklären. Zusätzlich unbekannten Namen und falsche
 Argumentanzahl unterscheiden. Bei Fehlern wird die betreffende Regel geklärt,
 nicht nur das Programm repariert.
 
-**Übergangskriterium:** Lernende können lokale Bindungen und die wartende
+**Übergangskriterium:** Schüler:innen können lokale Variablenwerte und die wartende
 Rechnung darstellen und `return` erklären, ohne es als Ausgabe zu beschreiben.
 
 ## A3 — Das Design-Rezept an vollständigen Zwischenständen
@@ -123,7 +123,7 @@ welcher Schritt aus einer gültigen Definition eine erfüllte Lösung macht.
 
 **Aktivität:** Das sechsstufige Rezept aus der
 [Didaktik](lecture-didactics.md#design-rezept-und-ausführbare-zwischenstände)
-an einem wertliefernden Beispiel bearbeiten. Anschließend eine Funktion mit
+an einem wertliefernden Beispiel bearbeiten. Anschliessend eine Funktion mit
 mehreren Fällen, etwa dem bisherigen Maximum zweier Zahlen, eigenständig
 entwerfen. Die kommentierte Zweckbeschreibung verwendet die Parameternamen.
 
@@ -153,15 +153,15 @@ danach Wunschdenken für den Rest und Implementierung nach Design-Rezept.
 Erst einen kurzen Aufruf vollständig verfolgen, dann den Entwurf ohne
 vollständiges gedankliches Aufrollen begründen.
 
-**Evidenz und Anpassung:** Getrennte lokale Bindungen, Basisfall und Rückweg
+**Evidenz und Anpassung:** Eigene lokale Variablen pro Aufruf, Basisfall und Rückweg
 werden erklärt; die Lösung besteht begründete Beispiele. Einen
 `RecursionError` nicht automatisch als Beweis einer nichtterminierenden
 Definition werten.
 
 **Transfer:** Die bisherige Summation verbindet den Einstieg mit bekannten
-Zahlenproblemen. Manhattan-Routen können anschließend zwei Teilprobleme
+Zahlenproblemen. Manhattan-Routen können anschliessend zwei Teilprobleme
 einführen, mit nichtnegativen ganzzahligen Koordinaten, Randfällen auf den
-Achsen und einer abnehmenden Größe `x + y`. Kleine Eingaben halten
+Achsen und einer abnehmenden Grösse `x + y`. Kleine Eingaben halten
 Ausführungsumfang und Laufzeit überschaubar. Dieser konkrete Kontext ist
 ersetzbar; rekursiver Entwurf und Erklärung bleiben Pflicht.
 
@@ -231,7 +231,7 @@ zusammenführen; gezielt noch offene Ziele prüfen.
 eine wertliefernde Funktion nach Rezept entwerfen; eine rekursive Lösung
 begründen; einen Sprachbefehl erweitern; eine neue Ersetzungsfolge verfolgen.
 Diese Nachweise können über mehrere Aufgaben verteilt werden. Ein einziges
-Großprojekt ist nicht erforderlich.
+Grossprojekt ist nicht erforderlich.
 
 **Evidenz:** Individuelle Vorhersage, regelbasierte Erklärung, Umsetzung und
 gezielter Test. Auch bei Partner- oder Projektarbeit individuelle Erklärungen

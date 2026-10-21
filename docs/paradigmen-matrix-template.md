@@ -16,8 +16,8 @@ duplizieren. Leere Beobachtungsfelder werden erst beim Einsatz ausgefüllt.
 
 | Modell und Modul | Ziele | Sichtbarer Zustand und zentrale Regel | Brücke zum bisherigen Modell | Diagnose / erwartete Evidenz | Fehlvorstellung und Grenze |
 | --- | --- | --- | --- | --- | --- |
-| M1 / A0–A1: Ausdrücke | PY1–PY4, EX1–EX3 | Ausdruck, Bindungen, nächster Schritt; Teilrechnung auswerten und Kontext erhalten. | Bekannte Snap!- und Python-Abläufe diagnostisch aufgreifen. | `3 * (2 + 4) → 3 * 6 → 18`; nach `a = 3; b = a + 1; a = 8` bleibt `b` gleich `4`. | Zuweisung als dauerhafte Gleichung; noch keine Erklärung mehrzeiliger Aufrufe. |
-| M2 / A1: Reines Einsetzen | FU1, FU2, FU4, FU6 | Definition, Argumentwerte, Restrechnung; Argumente auswerten, dann Werte einsetzen. | M1 auf reine mathematisch anschlussfähige Funktionen ausdehnen. | Für `f(x) = x² + 1` bei `f(1 + f(2))` inneren Wert `5`, äußeres Argument `6`, Ergebnis `37` begründen. | Äußerer Rumpf starte sofort; keine allgemeine Textsubstitution für Python. |
+| M1 / A0–A1: Ausdrücke | PY1–PY4, EX1–EX3 | Ausdruck, gespeicherte Variablenwerte, nächster Schritt; Teilrechnung auswerten und Kontext erhalten. | Das bekannte Box-Modell aus Snap! und Python aufgreifen. | `3 * (2 + 4) → 3 * 6 → 18`; nach `a = 3; b = a + 1; a = 8` bleibt in `b` der Wert `4` gespeichert. | Zuweisung als dauerhafte Gleichung; noch keine Erklärung mehrzeiliger Aufrufe. |
+| M2 / A1: Reines Einsetzen | FU1, FU2, FU4, FU6 | Definition, Argumentwerte, Restrechnung; Argumente auswerten, dann Werte einsetzen. | M1 auf reine mathematisch anschlussfähige Funktionen ausdehnen. | Für `f(x) = x² + 1` bei `f(1 + f(2))` inneren Wert `5`, äusseres Argument `6`, Ergebnis `37` begründen. | Äusserer Rumpf starte sofort; keine allgemeine Textsubstitution für Python. |
 | M3 / A2–A3: Python-Aufrufe | FU1–FU8, DR1–DR3 | Lokale Rahmen, aktuelle Anweisung, wartende Rechnung, Ausgabe; Wert zurückgeben und genau dort fortsetzen. | M2 liefert für reine Fälle dasselbe Resultat; Anweisungen und Wirkungen kommen hinzu. | Ausgabe `3`, Wert `None`, dann Fehler bei `f(3) + 1`, wenn `f` nur `print(x)` ausführt. | Ausgabe sei Rückgabe; Grenzen bei Closures, globaler Mutation und Aliasing. |
 | M4 / A4: Rekursive Aufrufe und Entwurf | RE1–RE5, DR2–DR3, FU4–FU8 | Dieselben Aufrufrahmen; Basisfall liefert Wert, wartende Arbeit wird auf dem Rückweg fortgesetzt. | Keine neuen Aufrufregeln; Wunschdenken ist eine zusätzliche Entwurfsstrategie. | Für Zeichenzählen auf `"ab"` getrennte Aufrufe mit Rückgaben `0`, `1`, `2` und abnehmender Länge erklären. | Basisfall beende alle Aufrufe; endliche Python-Rekursionstiefe nicht mit semantischer Nichtterminierung verwechseln. |
 | M5 / A5: Befehlsinterpretation | SP1, SP2, PY1, PY3, PY4 | Quellposition, Pose, Zeichnung, gespeicherte Posen; nächsten Befehl nach Spezifikation ausführen. | Bekannte Funktionen und Zeichenschleifen tragen einen Interpreter. | Handspur und Implementierungsstelle zuordnen; neuen Befehl spezifizieren und mit gezieltem Test ergänzen. | Sprachwort sei Python-Code; Posenstapel und Aufrufstapel sind nicht dasselbe. |
@@ -25,11 +25,11 @@ duplizieren. Leere Beobachtungsfelder werden erst beim Einsatz ausgefüllt.
 
 Die Tabelle ist ein Wegweiser, keine vollständige Testabdeckung. Vor allem die
 Operatoren aus PY2, die einzelnen Rezeptschritte und unterschiedliche
-Fehlerursachen brauchen mehrere Aufgaben gemäß Agenda.
+Fehlerursachen brauchen mehrere Aufgaben gemäss Agenda.
 
 ## Wiederverwendbare Planungsvorlage
 
-Für eine neue oder überarbeitete Aufgabe eine Zeile anlegen. Eine bloße
+Für eine neue oder überarbeitete Aufgabe eine Zeile anlegen. Eine blosse
 Themenüberschrift oder ein Werkzeugname ist noch kein Ausführungsmodell.
 
 | Aufgabe / Modell / Ziel-IDs | Geltungsbereich und Voraussetzungen | Sichtbarer Zustand | Übergangsregel | Anschluss und Erweiterungsgrenze | Erwartete Fehlvorstellung | Diagnose und Aktivität | Erwarteter Nachweis |

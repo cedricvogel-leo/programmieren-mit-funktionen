@@ -8,14 +8,14 @@ Zielgruppe und überprüfbare Ziele stehen in der
 [Agenda](lecture-agenda.md). Der [Modellbogen](paradigmen-matrix-template.md)
 verbindet erwartete Erklärungen mit tatsächlichen Beobachtungen.
 
-**Leitentscheidung:** Die Lernenden sollen eine explizite Vorstellung davon
+**Leitentscheidung:** Die Schüler:innen sollen eine explizite Vorstellung davon
 entwickeln, wie die betrachteten Programme schrittweise ausgeführt werden.
 Erfolgreiches Schreiben allein belegt dieses Verständnis nicht.
 
 Eine **notionale Maschine** ist das bewusst ausgewählte, menschenlesbare
 Ausführungsmodell. Ein **mentales Modell** ist die Vorstellung, die eine
 Person davon tatsächlich aufgebaut hat. Die Lehrkraft kann ein korrektes
-Modell anbieten, ohne dass Lernende es bereits konsistent anwenden.
+Modell anbieten, ohne dass Schüler:innen es bereits konsistent anwenden.
 Deshalb gehören Diagnose, Erklärung und Überarbeitung zum Unterricht.
 
 ## Forschungsgrundlage und Reichweite
@@ -29,11 +29,11 @@ Fassung wurde weiter redigiert. Abschnittsangaben beziehen sich auf den Entwurf.
 
 | Grundlage im Kapitel | Aussage und Evidenzstatus | Konsequenz für diesen Entwurf |
 | --- | --- | --- |
-| §4: Notional Machines | Die Autoren schlagen menschenlesbare operationale Semantik als Ordnungsprinzip vor. Für eine Sprache können mehrere Modelle sinnvoll sein. | Modellzustand und Regeln explizit benennen, nicht bloß Funktionen als Syntax einführen. |
+| §4: Notional Machines | Die Autoren schlagen menschenlesbare operationale Semantik als Ordnungsprinzip vor. Für eine Sprache können mehrere Modelle sinnvoll sein. | Modellzustand und Regeln explizit benennen, nicht bloss Funktionen als Syntax einführen. |
 | §4: Lernen von Modellen | Das Kapitel berichtet Studien zugunsten aktiver Auseinandersetzung und früher expliziter Ablaufverfolgung; passives Betrachten einer Visualisierung genügt nicht als Lernhandlung. | Eigene Vorhersagen und begründete Schritte vor dem Werkzeugvergleich verlangen. |
 | §4 und §5.2 | Welche Modelle in welcher Reihenfolge am besten wirken und wie Modelle weiterentwickelt werden, sind ausdrücklich offene Forschungsfragen. | Die unten vorgeschlagene Progression als Unterrichtsentwurf prüfen, nicht als bewiesene optimale Sequenz darstellen. |
-| §4.1: Mutation and State | Zustandsänderung, zeitliche Reihenfolge und Aliasing machen scheinbar einfache Modelle komplex. | Bereits bekannte Zuweisung präzise aufgreifen; keine falschen Kopier- oder Kistenmetaphern für ganz Python etablieren. |
-| §4.2: Transfer | Mathematischer Transfer braucht passende Verhaltensmodelle; algebraische Variablen und veränderliche Programmbindungen sind nicht gleichzusetzen. | Den mathematischen Einstieg auf einen expliziten reinen Teilbereich beschränken. |
+| §4.1: Mutation and State | Zustandsänderung, zeitliche Reihenfolge und Aliasing machen scheinbar einfache Modelle komplex. | Das bekannte Box-Modell für den vereinbarten Teilbereich beibehalten und seine Grenze bei gemeinsam verwendeten veränderbaren Objekten ausdrücklich festhalten. |
+| §4.2: Transfer | Mathematischer Transfer braucht passende Verhaltensmodelle; algebraische Variablen und Variablen mit durch Zuweisung veränderbaren Werten sind nicht gleichzusetzen. | Den mathematischen Einstieg auf einen expliziten reinen Teilbereich beschränken. |
 | §5.1–5.3 | Alltagssprache, visuelle Syntax und Sprachwechsel können individuelle Fehlvorstellungen beeinflussen. Blocksyntax erklärt nicht automatisch die Ausführungssemantik. | Snap!-Vorerfahrung aktivieren, aber semantisches Verständnis gesondert diagnostizieren. |
 | §6.2: Repetition | Die Autoren kritisieren unergiebige Rekursionsbeispiele und unterscheiden strukturelle von generativer Rekursion; strukturelle Rekursion wird als zugänglicherer Einstieg begründet. | Ein strukturell kleiner werdendes Datenproblem als Einstieg prüfen; Zahlenrätsel und generative Grafik nicht automatisch an den Anfang setzen. |
 
@@ -44,11 +44,62 @@ Klasse noch die Überlegenheit eines bestimmten Unterrichtsformats.
 Es ist eine Forschungsübersicht mit Argumenten und offenen Fragen, keine
 einzelne Interventionsstudie für diesen Kurs.
 
+## Festlegung: Werte werden in Variablen gespeichert
+
+Die Schüler:innen kennen Variablen bereits als benannte Boxen, in denen Werte
+gespeichert werden. **Dieses Box-Modell behalten wir für die Einheit bei.**
+Wir sprechen von «Variablen», «gespeicherten Werten», «Werte lesen» und
+«Werte speichern», nicht von «Bindungen». Eine neue Referenzterminologie ist
+für die vorgesehenen Lernziele nicht erforderlich.
+
+Für die Unterrichtsdarstellung gelten folgende Regeln:
+
+- Eine Zuweisung wertet zuerst den rechten Ausdruck aus und speichert
+  anschliessend das Ergebnis in der links genannten Variable. Ein bisher
+  gespeicherter Wert wird ersetzt.
+- Die Verwendung einer Variable in einem Ausdruck liest ihren aktuell
+  gespeicherten Wert.
+- Bei `b = a + 1` wird das Ergebnis der Rechnung in `b` gespeichert, nicht
+  eine dauerhaft nachzurechnende Formel. Eine spätere Zuweisung an `a`
+  verändert den in `b` gespeicherten Wert nicht.
+- Bei `b = a` enthält `b` im Modell danach denselben Wert wie `a`.
+  Daraus folgt keine dauerhafte Verbindung zwischen diesen Variablen.
+- Jeder Funktionsaufruf hat eigene lokale Variablen. Die ausgewerteten
+  Argumentwerte werden in den zugehörigen Parametervariablen gespeichert.
+  Auch rekursive Aufrufe erhalten jeweils eigene Boxen.
+
+**Geltungsbereich:** Das Modell wird für Zahlen, Wahrheitswerte, Zeichenketten
+und den Rückgabewert `None` verwendet. Bei diesen Beispielen liefert es die
+benötigten Vorhersagen zu Ausdrücken, Zuweisungen, Aufrufen und Rekursion.
+Auch die Verkettung von Zeichenketten berechnet einen neuen Wert; sie verändert
+nicht eine gemeinsam verwendete Zeichenkette.
+
+**Grenze für die Lehrkraft:** Dies ist eine bewusste didaktische
+Vereinfachung, keine Beschreibung der allgemeinen Python-Objektsemantik oder
+der physischen Speicherung. Python-Namen können dasselbe Objekt bezeichnen.
+Wird ein gemeinsam verwendetes veränderbares Objekt, etwa eine Liste,
+verändert, erklärt ein Modell voneinander unabhängiger Werteboxen das
+Verhalten nicht mehr. Eine Zuweisung kopiert in Python nicht allgemein ein
+Objekt. Solche Mutation, Objektidentität und Aliasing sind kein Lerngegenstand
+dieser Einheit. Vor ihrer Einführung muss das Modell erweitert werden.
+
+Der bereitgestellte Turtle-Interpreter darf intern veränderbaren Zustand und
+einen Posenstapel verwenden. Diese Schnittstelle wird über ihre festgelegten
+Operationen erklärt, nicht als Beleg für unabhängige Kopien beliebiger Objekte.
+Aufgaben zur Interpreter-Erweiterung verlangen keine Vorhersagen zu geteilten
+veränderbaren Objekten. Falls sie solche Vorhersagen benötigen, muss zuerst
+der Modellumfang angepasst werden.
+
+Das Beibehalten des Box-Modells ist unsere lokale didaktische Entscheidung
+zum Anschluss an das Vorwissen. Es ist keine Empfehlung dieses konkreten
+Modells durch Krishnamurthi und Fisler. Die bewusste Begrenzung folgt der
+oben eingeordneten Forderung, Modellgrenzen nicht zu verschleiern.
+
 ## Anschluss an Snap! und die bisherige Einheit
 
 Das [Snap!-Material](https://computingeducation.de/algorithmen-mit-snap/)
 verbindet projektbezogene Wahlmöglichkeiten mit gemeinsamer Konzeptabdeckung.
-Die Klasse hat außerdem Snap!-Programme nach Python übersetzt.
+Die Klasse hat ausserdem Snap!-Programme nach Python übersetzt.
 Wir übernehmen weder eine reine Anfängereinführung noch die Annahme, damit
 seien alle Ausführungsfragen geklärt.
 
@@ -56,8 +107,8 @@ seien alle Ausführungsfragen geklärt.
 | --- | --- | --- |
 | Blockformen unterscheiden wertliefernde Ausdrücke und Befehle. | Kann die Person in Python Ausdruck und Anweisung unterscheiden? | Kontrastpaar mit gleichem Zweck, aber unterschiedlicher Syntax bearbeiten. |
 | Verzweigungen und Wiederholung sind bekannt. | Wird genau ein Zweig gewählt? Welche Werte durchläuft die Schleifenvariable? | Einen konkreten Ablauf protokollieren, nur nötige Lücken sichern. |
-| Variablen wurden verwendet. | Wird eine Zuweisung als Bindungsänderung oder als dauerhafte Gleichung verstanden? | `a = 3; b = a + 1; a = 8` mit getrennten Schritten erklären. |
-| Eigene Blöcke könnten bekannt sein. | Wurden sie tatsächlich eingesetzt? Werden Parameter und getrennte Aufrufe verstanden? | Zunächst Erfahrung erheben; lokale Bindungen nicht voraussetzen. |
+| Variablen sind als Werteboxen bekannt. | Wird bei einer Zuweisung ein berechneter Wert oder vermeintlich eine dauerhafte Gleichung gespeichert? | `a = 3; b = a + 1; a = 8` mit getrennten Speicherständen erklären. |
+| Eigene Blöcke könnten bekannt sein. | Wurden sie tatsächlich eingesetzt? Werden Parameter und getrennte Aufrufe verstanden? | Zunächst Erfahrung erheben; eigene lokale Variablen pro Aufruf nicht voraussetzen. |
 
 Die alten Präsentationen enthalten bereits brauchbare Bausteine:
 Reduktionspfeile und mathematische Aufrufe (1201), das sechsstufige Rezept
@@ -75,38 +126,38 @@ und Demoquellen, auf die sie verweisen, liegen nicht vollständig vor. Aussagen
 - `→` bezeichnet einen erlaubten Auswertungsschritt, `=` eine Zuweisung,
   `==` einen Vergleich. Mathematische Definitionen werden als solche beschriftet.
 - Wir trennen **verbleibenden Ausdruck**, **aktuelle Anweisung**, **lokale
-  Namensbindungen**, **wartende Aufrufe mit Rückkehrstellen** und **Ausgabe**.
+  Variablen mit gespeicherten Werten**, **wartende Aufrufe mit Rückkehrstellen** und **Ausgabe**.
   Nur die jeweils benötigten Teile werden sichtbar gemacht.
-- Ein Zustandsübergang braucht eine Regel als Begründung. „Der Computer weiß,
-  was gemeint ist“ ist keine Erklärung.
+- Ein Zustandsübergang braucht eine Regel als Begründung. «Der Computer weiss,
+  was gemeint ist» ist keine Erklärung.
 - Reduktionsschritte und Visualisierungsereignisse müssen nicht dieselbe
-  Granularität haben. Entscheidend ist, dass beide dieselben Bindungen,
+  Granularität haben. Entscheidend ist, dass beide dieselben Variablenwerte,
   Reihenfolgen, Ergebnisse und Ausgaben vorhersagen.
 - Fehler sind mögliche Ergebnisse eines Schritts. Fehlerursache und schon
   erfolgte Ausgaben werden getrennt festgehalten.
 
 ## M1 — Ausdrücke werden zu Werten ausgewertet
 
-**Geltungsbereich:** Zunächst Zahlen, Zeichenketten, bekannte Namen und die
+**Geltungsbereich:** Zunächst Zahlen, Zeichenketten, bekannte Variablen und die
 vereinbarten arithmetischen beziehungsweise Vergleichsoperationen.
 Zuweisungen und Kontrollfluss werden als Anweisungen daneben behandelt.
 
-**Sichtbarer Zustand:** Noch auszuwertender Ausdruck, bekannte Bindungen und
+**Sichtbarer Zustand:** Noch auszuwertender Ausdruck, Variablen mit ihren gespeicherten Werten und
 die markierte nächste Teilrechnung.
 
-**Regeln:** Namen nachschlagen; Teilrechnungen gemäß Python-Reihenfolge und
+**Regeln:** Werte aus Variablen lesen; Teilrechnungen gemäss Python-Reihenfolge und
 Präzedenz auswerten; das Ergebnis an derselben Stelle einsetzen; den übrigen
-Ausdruck erhalten. Ein unbekannter Name oder eine nicht erlaubte Operation
+Ausdruck erhalten. Eine noch nicht definierte Variable oder eine nicht erlaubte Operation
 führt zum entsprechenden Fehler, nicht zu einem geratenen Wert.
 
-**Angestrebtes mentales Modell:** „Ich kann sagen, was als Nächstes berechnet
-wird und welcher Teil der Rechnung dadurch unverändert bleibt.“
+**Angestrebtes mentales Modell:** «Ich kann sagen, was als Nächstes berechnet
+wird und welcher Teil der Rechnung dadurch unverändert bleibt.»
 
 **Diagnose und Nachweis:** `3 * (2 + 4)` schrittweise reduzieren; die
 Zuweisungsfolge aus der Snap!-Diagnose protokollieren. Erwartet werden
-`3 * 6 → 18` und am Ende die Bindungen `a: 8`, `b: 4`.
+`3 * 6 → 18` und am Ende die gespeicherten Werte `a: 8`, `b: 4`.
 
-**Fehlvorstellung:** Zuweisung ändere rückwirkend eine andere Bindung oder
+**Fehlvorstellung:** Zuweisung ändere rückwirkend den Wert einer anderen Variable oder
 Rechnen erfolge unabhängig von der Klammerung immer strikt von links nach rechts.
 
 **Anschluss und Grenze:** Anschluss an bekannte Ausdrücke und mathematisches
@@ -127,14 +178,14 @@ der verbleibende umgebende Ausdruck.
 Werte den Parametern zuordnen, im reinen Ausdrucksmodell einsetzen und weiter
 auswerten. Der Rumpf wird nicht schon bei der Definition ausgeführt.
 
-**Angestrebtes mentales Modell:** „Ein Argument kann selbst eine Rechnung
-sein. Deren Wert wird eingesetzt, nicht ihr noch unausgewerteter Text.“
+**Angestrebtes mentales Modell:** «Ein Argument kann selbst eine Rechnung
+sein. Deren Wert wird eingesetzt, nicht ihr noch unausgewerteter Text.»
 
 **Diagnose und Nachweis:** Für `f(1 + f(2))` die innere Rechnung, den Wert `5`,
-das äußere Argument `6` und schließlich das Ergebnis `37` erklären.
+das äussere Argument `6` und schliesslich das Ergebnis `37` erklären.
 Ein unbekannter Funktionsname ist als Fehler zu begründen.
 
-**Fehlvorstellung:** Der äußere Rumpf beginne vor der Auswertung der Argumente;
+**Fehlvorstellung:** Der äussere Rumpf beginne vor der Auswertung der Argumente;
 Definition und Aufruf seien dasselbe.
 
 **Anschluss und Grenze:** M1 bleibt gültig. Das Einsetzen ist eine gezielte
@@ -142,27 +193,29 @@ Rechenansicht für den reinen Teilbereich, keine textuelle Implementierung
 beliebiger Python-Aufrufe. Sobald lokale Zuweisungen, Ausgabe und mehrere
 Anweisungen relevant werden, ergänzen wir M3 ausdrücklich.
 
-## M3 — Aufrufe mit lokalen Bindungen und Rückkehrstelle
+## M3 — Aufrufe mit lokalen Variablen und Rückkehrstelle
 
 **Geltungsbereich:** Einfache benannte Funktionen, positionelle Argumente,
-lokale Bindungen, Verzweigungen, Schleifen, `print`, `return`, `pass`.
-Globale Mutation, Closures und Aliasing veränderbarer Container bleiben außen vor.
+lokale Variablen, Verzweigungen, Schleifen, `print`, `return`, `pass`.
+Globale Mutation, Closures und Aliasing veränderbarer Container bleiben aussen vor.
 
 **Sichtbarer Zustand:** Aktuelle Anweisung; pro aktivem Aufruf ein eigener
-Rahmen mit lokalen Bindungen; wartende Fortsetzungen; Ausgabeprotokoll.
+Rahmen mit eigenen lokalen Variablen und ihren Werten; wartende Fortsetzungen; Ausgabeprotokoll.
 Definitionen sind getrennt verfügbar. Ein Rahmen ist eine Erklärungshilfe,
 keine Behauptung über die interne Speicherorganisation jeder Python-Laufzeit.
 
 **Regeln:**
 
-1. Eine Funktionsdefinition bindet einen Namen, führt aber den Rumpf nicht aus.
+1. Eine Funktionsdefinition macht die Funktion unter ihrem Namen verfügbar,
+   führt aber den Rumpf nicht aus.
 2. Beim Aufruf wird das Aufrufziel bestimmt; die Argumentausdrücke werden von
    links nach rechts ausgewertet. Bei einem Fehler wird der Rumpf nicht betreten.
-3. Nach erfolgreicher Argumentbindung beginnt ein neuer Aufruf mit eigenen
-   lokalen Bindungen. Falsche Argumentanzahl führt im betrachteten Teilbereich
+3. Nach erfolgreicher Zuordnung der Argumente beginnt ein neuer Aufruf.
+   Die Argumentwerte werden in seinen eigenen Parametervariablen gespeichert.
+   Falsche Argumentanzahl führt im betrachteten Teilbereich
    zu `TypeError`.
 4. Die aufrufende Rechnung wartet an einer bestimmten Stelle. Lokale
-   Zuweisungen verändern die Bindungen dieses Aufrufs.
+   Zuweisungen speichern Werte in den lokalen Variablen dieses Aufrufs.
 5. `print` schreibt in das Ausgabeprotokoll; sein Rückgabewert ist `None`.
    Ausgabe ersetzt keine Rückgabe eines berechneten Wertes.
 6. Bei `return ausdruck` wird zuerst `ausdruck` ausgewertet. Danach endet
@@ -171,12 +224,12 @@ keine Behauptung über die interne Speicherorganisation jeder Python-Laufzeit.
 7. Ein erreichtes Funktionsende ohne `return` sowie ein nacktes `return`
    liefern `None`. `pass` tut nichts und setzt die Ausführung danach fort.
 
-**Angestrebtes mentales Modell:** „Jeder Aufruf hat eigene lokale Namen.
-Der Aufrufer wartet auf einen Wert; ausgegebener Text ist eine andere Wirkung.“
+**Angestrebtes mentales Modell:** «Jeder Aufruf hat eigene lokale Variablen.
+Der Aufrufer wartet auf einen Wert; ausgegebener Text ist eine andere Wirkung.»
 
 **Diagnose und Nachweis:** Eine Funktion mit `print(x)` und ohne explizites
 `return` im Ausdruck `f(3) + 1` verfolgen: erst Ausgabe `3`, dann `None` als
-Funktionswert, anschließend `TypeError`. In einem zweiten Beispiel mit
+Funktionswert, anschliessend `TypeError`. In einem zweiten Beispiel mit
 `return x + 1` wird der zurückgegebene Wert ohne automatische Ausgabe verwendet.
 
 **Weitere Kontraste:** Zwei Aufrufe mit demselben Parameternamen; ein `print`
@@ -190,9 +243,9 @@ gehören deshalb zu M3, nicht zum reinen Teilbereich M2.
 der Aufrufer starte nach der Rückgabe von vorn.
 
 **Anschluss und Grenze:** M2 und M3 müssen für reine Beispiele dasselbe
-Ergebnis liefern. Gebunden werden Werte, nicht pauschal Kopien beliebiger
-Objekte. Vor Beispielen mit geteilten veränderbaren Objekten müsste das Modell
-um Referenzen und Aliasing erweitert werden.
+Ergebnis liefern. Die Werteboxen erklären nur den oben vereinbarten
+Teilbereich. Vor Beispielen mit geteilten veränderbaren Objekten müsste das
+Modell um Referenzen und Aliasing erweitert werden.
 
 ## M4 — Rekursion ist kein neuer Aufrufmechanismus
 
@@ -204,27 +257,27 @@ gegebenenfalls mehrere.
 Aktivierungen derselben Definition; noch ausstehende Rechnungen und Rückgaben.
 
 **Regeln:** Ein Selbstaufruf arbeitet genauso wie ein anderer Aufruf. Er erhält
-eigene Parameterbindungen. Der aktuelle Aufruf wartet, bis der innere einen
+eigene Parametervariablen mit den übergebenen Werten. Der aktuelle Aufruf wartet, bis der innere einen
 Wert zurückgibt. Erst danach kann die ausstehende Rechnung fertig werden.
 Im Basisfall entsteht ein Ergebnis ohne weiteren Selbstaufruf.
 
-**Angestrebtes mentales Modell:** „Die Definition ist einmal vorhanden,
+**Angestrebtes mentales Modell:** «Die Definition ist einmal vorhanden,
 aber mehrere Aufrufe können gleichzeitig noch nicht beendet sein. Ihre
-Arbeit wird beim Rückweg fortgesetzt.“
+Arbeit wird beim Rückweg fortgesetzt.»
 
-**Diagnose und Nachweis:** Für einen vorgegebenen Vertrag „Zeichen zählen“
+**Diagnose und Nachweis:** Für einen vorgegebenen Vertrag «Zeichen zählen»
 den Aufruf auf `"ab"` verfolgen: Rahmen für `"ab"`, `"b"`, `""`;
 beim Rückweg Ergebnisse `0`, `1`, `2`. Dabei angeben, wo jeweils noch `1 + …`
 wartet. Die nötigen Operationen für Leerprüfung und Restzeichenkette werden
 vorher bereitgestellt; Indexierung und Slicing gelten nicht als Vorwissen.
 
 **Wunschdenken als Entwurf:** Getrennt von diesem Ablauf annehmen, dass die
-Funktion den strikt kleineren Rest gemäß Vertrag löst. Dann bestimmen, wie
+Funktion den strikt kleineren Rest gemäss Vertrag löst. Dann bestimmen, wie
 dieses Ergebnis zum Gesamtergebnis ergänzt wird. Diese Annahme braucht
-Eingabebereich, Basisfall und eine abnehmende Größe; sie ist keine Behauptung,
+Eingabebereich, Basisfall und eine abnehmende Grösse; sie ist keine Behauptung,
 Python errate das Resultat.
 
-**Fehlvorstellungen:** Ein Selbstaufruf überschreibe den äußeren Parameter;
+**Fehlvorstellungen:** Ein Selbstaufruf überschreibe den äusseren Parameter;
 der Basisfall beende sofort alle Aufrufe; Wunschdenken ersetze die Begründung,
 warum das Problem kleiner wird.
 
@@ -237,7 +290,7 @@ Rekursionstiefe scheitern; dieser Fehler allein beweist keine Nichtterminierung.
 plus Rest bieten einen zu prüfenden strukturellen Einstieg. Das ist eine
 konkrete lokale Ableitung aus §6.2, kein dort getestetes Python-Curriculum.
 Die bisherigen Dominos können Wunschdenken illustrieren, ersetzen aber
-keinen Aufrufrahmen. Summation kann anschließend den alten Ansatz verbinden.
+keinen Aufrufrahmen. Summation kann anschliessend den alten Ansatz verbinden.
 Manhattan-Routen bleiben als späterer Transfer mit zwei kleineren Problemen
 erhalten; die zusätzlichen Anforderungen und Eingabebereiche sind auszuweisen.
 
@@ -256,14 +309,14 @@ ausführen; dann die Leseposition weiterstellen. `[` speichert die aktuelle
 Pose; `]` entnimmt die zuletzt gespeicherte Pose und stellt sie wieder her,
 ohne beim Zurücksetzen eine Verbindungslinie zu zeichnen.
 
-**Angestrebtes mentales Modell:** „Eine Spezifikation legt das Verhalten
+**Angestrebtes mentales Modell:** «Eine Spezifikation legt das Verhalten
 fest. Ein Python-Programm kann dieses Verhalten ausführen. Das Quellwort ist
-dabei Eingabe und wird nicht selbst zu Python-Code.“
+dabei Eingabe und wird nicht selbst zu Python-Code.»
 
 **Diagnose und Nachweis:** Einen kurzen Befehlsstring von Hand verfolgen;
 einen neuen Befehl erst mit einer Wirkung und einem unterscheidenden Test
 beschreiben, dann in der bereitgestellten Implementierung ergänzen.
-Ein Test muss mehr prüfen als nur „das Programm läuft“.
+Ein Test muss mehr prüfen als nur «das Programm läuft».
 
 **Fehlvorstellungen:** Bedeutung und Implementierung seien dasselbe;
 gespeicherte Posen würden in Speicherreihenfolge statt LIFO entnommen;
@@ -274,7 +327,7 @@ Interpreter. Befehls- und Aufrufstapel sind trotz ähnlicher LIFO-Ordnung
 verschiedene Zustände. Die nötigen Stapeloperationen werden bereitgestellt.
 Vor der Umsetzung ist festzulegen, ob ungültige Klammerfolgen ausgeschlossen
 oder mit klarer Fehlermeldung behandelt werden. Es gibt kein stilles
-„Reparieren“ einer unterspezifizierten Eingabe.
+«Reparieren» einer unterspezifizierten Eingabe.
 
 ## M6 — L-Systeme ersetzen Wörter, der Interpreter zeichnet sie
 
@@ -291,8 +344,8 @@ nächsten Generation bearbeitet. Die so beschriebene parallele Ersetzung kann
 technisch durch eine Schleife über das alte Wort umgesetzt werden.
 Erst nach Fertigstellung wird das neue Wort interpretiert.
 
-**Angestrebtes mentales Modell:** „Wachstumsregeln erzeugen ein Wort.
-Zeichenbefehle geben diesem Wort anschließend eine grafische Bedeutung.“
+**Angestrebtes mentales Modell:** «Wachstumsregeln erzeugen ein Wort.
+Zeichenbefehle geben diesem Wort anschliessend eine grafische Bedeutung.»
 
 **Diagnose und Nachweis:** Für `A → AB`, `B → A` ab `A` die Generationen
 `AB`, `ABA`, `ABAAB` angeben und jeweils auf die Quellgeneration verweisen.
@@ -320,7 +373,7 @@ Das bisherige Rezept bleibt der Ausgangspunkt:
 | 5. Rumpf implementieren | Lösung nach Vertrag; bei Rekursion Basisfall, kleinerer Teilauftrag und Kombination. | Weiterhin gültiges Python; noch scheiternde Tests werden bearbeitet. |
 | 6. Prüfen und überarbeiten | Tests ausführen, Abweichungen erklären, weitere Fälle ergänzen. | Die fertige Lösung besteht die vereinbarten Tests und wird erklärt. |
 
-„Ausführbar“ meint bis zur fertigen Lösung nicht „inhaltlich fertig“.
+«Ausführbar» meint bis zur fertigen Lösung nicht «inhaltlich fertig».
 Zwischenstände dürfen keine absichtlichen Syntax-, Namens- oder Typfehler
 enthalten. Die Lehrkraft stellt dafür passende Testformen bereit:
 `assert volumen(2, 3, 4) == 24` scheitert am Platzhalter durch `AssertionError`;
@@ -356,7 +409,7 @@ Das ist kein starres Ritual für jede Aufgabe. Ein knapper Lehrkraftimpuls kann
 ein Modell einführen oder eine gemeinsame Fehlvorstellung klären. Mit
 wachsenden Fähigkeiten werden Hilfen reduziert und längere Arbeitsphasen
 möglich. Aufgabenwahl und eigene Kontexte können an die Snap!-Erfahrung
-anschließen; gemeinsame Modell- und Lernzielnachweise bleiben verbindlich.
+anschliessen; gemeinsame Modell- und Lernzielnachweise bleiben verbindlich.
 
 | Format | Mögliche Stärke | Risiko und Umgang |
 | --- | --- | --- |
@@ -379,7 +432,7 @@ Es ist ein Prüfwerkzeug, nicht die Definition der notionalen Maschine.
 - Vor einem Lauf steht ein überprüfbarer eigener Gedanke; wahlloses
   Wiederholen der Ausführung ersetzt keine Erklärung.
 - Für Aufrufrahmen werden nur tatsächlich verfügbare Visualisierungsansichten
-  versprochen. Ob lokale Bindungen, Rückkehrstellen und Zwischenausdrücke
+  versprochen. Ob lokale Variablenwerte, Rückkehrstellen und Zwischenausdrücke
   geeignet sichtbar sind, muss bei der späteren Inhaltserstellung geprüft
   werden; andernfalls ergänzen wir eine konsistente manuelle Darstellung.
 - Die Makro-Laufzeiten der Blöcke sind isoliert. Spätere Beispiele müssen ihre

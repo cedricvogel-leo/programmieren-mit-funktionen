@@ -12,33 +12,33 @@ import: https://raw.githubusercontent.com/cedricvogel-leo/glpython-liascript/mai
 
 [Im LiaScript-Reader öffnen](https://liascript.github.io/course/?https://raw.githubusercontent.com/cedricvogel-leo/programmieren-mit-funktionen/main/README.md)
 
-In dieser Lerneinheit zerlegst du ein Programm in überschaubare Funktionen.
-Du untersuchst Funktionsaufrufe, übergibst Argumente und verwendest Rückgabewerte.
+In dieser Lerneinheit zerlegen Sie ein Programm in überschaubare Funktionen.
+Sie untersuchen Funktionsaufrufe, übergeben Argumente und verwenden Rückgabewerte.
 
-**Voraussetzungen:** Du kennst Variablen, Rechenoperationen, `print` und einfache
-`for`-Schleifen in Python. Erfahrung mit eigenen Funktionen brauchst du noch nicht.
+**Voraussetzungen:** Sie kennen Variablen, Rechenoperationen, `print` und einfache
+`for`-Schleifen in Python. Erfahrung mit eigenen Funktionen benötigen Sie noch nicht.
 
 **Zeitvorschlag:** 90 Minuten, zuzüglich einer optionalen Turtle-Aufgabe.
 
-## So arbeitest du mit der Einheit
+## So arbeiten Sie mit der Einheit
 
-Öffne die Einheit über den Link zum LiaScript-Reader. Auf GitHub kannst du den
+Öffnen Sie die Einheit über den Link zum LiaScript-Reader. Auf GitHub können Sie den
 Text lesen; die interaktiven Python-Beispiele funktionieren im Reader.
 
-1. Lies den Code und sage seine Ausgabe voraus.
-2. Starte den Code über die Ausführen-Schaltfläche.
-3. Nutze die schrittweise Visualisierung, um deine Vorhersage zu prüfen.
-4. Ändere den Code und erkläre die Auswirkungen.
+1. Lesen Sie den Code und notieren Sie Ihre Vorhersage seiner Ausgabe.
+2. Starten Sie den Code über die Ausführen-Schaltfläche.
+3. Nutzen Sie die schrittweise Visualisierung, um Ihre Vorhersage zu prüfen.
+4. Ändern Sie den Code und erklären Sie die Auswirkungen.
 
 Python läuft über [GLPython](https://github.com/cedricvogel-leo/glpython-liascript)
 im Browser. Eine lokale Python-Installation ist dafür nicht nötig; zum Laden des
-Readers, des Makros und der Laufzeit brauchst du eine Internetverbindung.
+Readers, des Makros und der Laufzeit benötigen Sie eine Internetverbindung.
 Jeder Codeblock hat eine eigene Laufzeit. Deshalb enthalten die Beispiele alle
 Definitionen, die sie benötigen.
 
 ## Lernziele
 
-Am Ende kannst du:
+Am Ende können Sie:
 
 1. eine Funktion definieren und mehrfach aufrufen;
 2. Parameter und Argumente unterscheiden;
@@ -48,7 +48,7 @@ Am Ende kannst du:
 
 ## 1. Wiederholungen erkennen
 
-Zwei Begrüßungen unterscheiden sich nur durch den Namen:
+Zwei Begrüssungen unterscheiden sich nur durch den Namen:
 
 ```python
 print("Hallo, Ada!")
@@ -59,8 +59,9 @@ print("Willkommen im Python-Kurs.")
 ```
 @GLPython.eval
 
-**Überlege:** Welche Zeilen müsstest du ändern, wenn die Begrüßung künftig aus
-drei Zeilen bestehen soll? Was passiert, wenn du eine Stelle vergisst?
+**Untersuchen Sie:** Notieren Sie, welche Zeilen Sie ändern müssten, wenn die
+Begrüssung künftig aus drei Zeilen bestehen soll. Beschreiben Sie, was passiert,
+wenn Sie eine Stelle vergessen.
 
 Eine Funktion gibt einem wiederverwendbaren Ablauf einen Namen.
 
@@ -80,8 +81,8 @@ begruesse()
 `def` beginnt die Definition. Der eingerückte Funktionskörper wird erst
 ausgeführt, wenn die Funktion aufgerufen wird. Die Klammern gehören zum Aufruf.
 
-**Aufgabe:** Ergänze eine dritte Zeile in der Funktion und rufe sie dreimal auf.
-Prüfe anschließend, ob jeder Aufruf die neue Zeile ausgibt.
+**Aufgabe:** Ergänzen Sie eine dritte Zeile in der Funktion und rufen Sie sie dreimal auf.
+Prüfen Sie anschliessend, ob jeder Aufruf die neue Zeile ausgibt.
 
 ## 3. Parameter und Argumente
 
@@ -97,11 +98,11 @@ begruesse("Linus")
 ```
 @GLPython.eval
 
-`name` ist ein **Parameter** der Definition. `"Ada"` ist ein **Argument**, das
-beim Aufruf an diesen Parameter gebunden wird.
+`name` ist ein **Parameter** der Definition. `"Ada"` ist ein **Argument** des
+Aufrufs. Dieser Wert wird in der Parametervariable `name` gespeichert.
 
-**Aufgabe:** Ergänze einen zweiten Parameter `kurs`. Jeder Aufruf soll eine
-Person in einem bestimmten Kurs begrüßen. Passe auch beide Aufrufe an.
+**Aufgabe:** Ergänzen Sie einen zweiten Parameter `kurs`. Jeder Aufruf soll eine
+Person in einem bestimmten Kurs begrüssen. Passen Sie auch beide Aufrufe an.
 
 ## 4. Ergebnisse zurückgeben
 
@@ -125,15 +126,15 @@ assert rechteckflaeche(0, 5) == 0
 Die Ausgabe lautet zuerst `12`, dann `22`. Die `assert`-Anweisungen prüfen
 Ergebnisse: Ist eine Bedingung falsch, wird ein Fehler angezeigt.
 
-**Experiment:** Ersetze `return breite * hoehe` durch `print(breite * hoehe)`.
-Untersuche die Ausgabe und die Fehlermeldung. Ohne explizites `return` liefert
+**Experiment:** Ersetzen Sie `return breite * hoehe` durch `print(breite * hoehe)`.
+Untersuchen Sie die Ausgabe und die Fehlermeldung. Ohne explizites `return` liefert
 eine Python-Funktion `None`; damit lässt sich hier nicht weiterrechnen.
-Stelle danach die funktionierende Version wieder her.
+Stellen Sie danach die funktionierende Version wieder her.
 
 ## 5. Lokale Variablen verfolgen
 
-Sage zunächst die beiden Ausgaben voraus. Gehe dann in der Visualisierung
-schrittweise durch die Funktionsaufrufe.
+Notieren Sie zunächst Ihre Vorhersage der beiden Ausgaben. Gehen Sie dann in
+der Visualisierung schrittweise durch die Funktionsaufrufe.
 
 ```python
 def verdopple(zahl):
@@ -149,7 +150,7 @@ print(zweiter_wert)
 ```
 @GLPython.visual
 
-**Erkläre:** Warum bleibt die Variable `zahl` außerhalb der Funktion gleich
+**Erklären Sie:** Warum bleibt die Variable `zahl` ausserhalb der Funktion gleich
 `5`? Welche Werte hat der lokale Parameter `zahl` bei den beiden Aufrufen?
 
 Der Parameter und `ergebnis` gehören zum jeweiligen Funktionsaufruf.
@@ -157,11 +158,11 @@ Der Parametername muss nicht mit dem Namen des übergebenen Wertes übereinstimm
 
 ## 6. Selbst anwenden
 
-Schreibe die Funktion `gesamtpreis(einzelpreis, anzahl)`. Sie soll den
+Schreiben Sie die Funktion `gesamtpreis(einzelpreis, anzahl)`. Sie soll den
 Gesamtpreis zurückgeben, nicht selbst ausgeben.
 
-Ersetze `pass` durch deine Lösung. Die Vorlage ist absichtlich noch nicht
-vollständig; die Prüfungen schlagen fehl, bis du sie ergänzt.
+Ersetzen Sie `pass` durch Ihre Lösung. Die Vorlage ist absichtlich noch nicht
+vollständig; die Prüfungen schlagen fehl, bis Sie sie ergänzen.
 
 ```python
 def gesamtpreis(einzelpreis, anzahl):
@@ -175,8 +176,8 @@ print("Alle Prüfungen bestanden.")
 ```
 @GLPython.eval
 
-**Transfer:** Speichere zwei Rückgabewerte für verschiedene Artikel in
-Variablen und gib ihre Summe aus. Ergänze einen eigenen Testfall.
+**Transfer:** Speichern Sie zwei Rückgabewerte für verschiedene Artikel in
+Variablen und geben Sie ihre Summe aus. Ergänzen Sie einen eigenen Testfall.
 
 ## 7. Optional: Zeichnen mit Funktionen
 
@@ -198,7 +199,7 @@ quadrat(100)
 ```
 @GLPython.turtle
 
-**Aufgabe:** Zeichne drei unterschiedlich große Quadrate. Erkläre den
+**Aufgabe:** Zeichnen Sie drei unterschiedlich grosse Quadrate. Erklären Sie den
 Unterschied zwischen dieser Funktion, die zeichnet, und einer Funktion, die
 eine Fläche als Zahl zurückgibt.
 
@@ -206,26 +207,27 @@ eine Fläche als Zahl zurückgibt.
 
 - Wann wird der Körper einer Funktion ausgeführt?
 - Was unterscheidet einen Parameter von einem Argument?
-- Wann brauchst du `return`, wann `print`?
-- Wie helfen dir kleine Testfälle beim Ändern eines Programms?
+- Wann benötigen Sie `return`, wann `print`?
+- Wie helfen Ihnen kleine Testfälle beim Ändern eines Programms?
 
-**Abschluss:** Zeige eine selbst geschriebene Funktion mit zwei Aufrufen und
-mindestens einer Prüfung. Begründe, welchen Teil des Programms sie vereinfacht.
+**Abschluss:** Zeigen Sie eine selbst geschriebene Funktion mit zwei Aufrufen und
+mindestens einer Prüfung. Begründen Sie, welchen Teil des Programms sie vereinfacht.
 
 ## Hinweise für Lehrkräfte und Beitragende
 
 Diese Datei ist zugleich der Einstieg und die ausführbare LiaScript-Quelle.
 Der Ordner `docs/` folgt der Dateistruktur des
 [Referenzprojekts](https://github.com/andre-dietrich/Datenbankensysteme-Vorlesung/tree/main/docs);
-die vier Dokumente bleiben vorerst als leere Platzhalter bestehen.
+die Dokumente enthalten die Planung der neuen Kursiteration.
 
 - [Rahmen und Lernziele](docs/lecture-outline.md)
 - [Ablauf und Zeitplanung](docs/lecture-agenda.md)
 - [Didaktik, Makros und Bearbeitung](docs/lecture-didactics.md)
 - [Vergleichsmatrix für die Reflexion](docs/paradigmen-matrix-template.md)
+- [Sprachkonventionen](docs/sprachkonventionen.md)
 
-Zum Bearbeiten kannst du diese Datei im
+Zum Bearbeiten können Sie diese Datei im
 [LiaScript LiveEditor](https://liascript.github.io/LiveEditor/) laden.
-Prüfe Änderungen im Reader oder LiveEditor: normale Markdown-Vorschauen führen
+Prüfen Sie Änderungen im Reader oder LiveEditor: normale Markdown-Vorschauen führen
 die Makros nicht aus. Der Reader-Link oben verwendet den Stand auf GitHub;
 lokale Änderungen sind dort erst nach dem Push auf `main` sichtbar.
