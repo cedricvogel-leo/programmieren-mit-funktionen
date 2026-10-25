@@ -45,6 +45,18 @@ Die bestehenden Texte wurden an diese Konventionen angepasst.
 
 - Kurze Sätze und überschaubare Absätze bevorzugen. Pro Arbeitsauftrag
   eine klar erkennbare Handlung formulieren.
+- Aufgaben so knapp und lokal verständlich formulieren, dass keine
+  allgemeine Vorgehenspräambel nötig ist. Nötige Hinweise unmittelbar an
+  die jeweilige Handlung stellen; Ausgangsdaten und Antwortform nicht auslassen.
+- Auswertungs- und Ausführungsregeln explizit erklären, den didaktischen
+  Zweck der Modellbildung im Material nicht oder nur minimal thematisieren.
+  Ausführliche Begründungen gehören in Planung oder Lehrkrafthinweise.
+- Im Schüler:innen-Text nur auf bereits behandelte Inhalte zurückverweisen.
+  Keine Vorverweise auf späteren Stoff oder vorsorglichen Abgrenzungen
+  gegenüber noch nicht eingeführten Konzepten verwenden.
+- Eine Aufgabe samt Speicher, Code, Eingaben und Prüfschritt im selben
+  LiaScript-Abschnitt halten. Innerhalb der Aufgabe fett gesetzte
+  Beschriftungen statt seitenbildender Markdown-Zwischenüberschriften verwenden.
 - Verben verwenden, die ein beobachtbares Ergebnis verlangen:
   «markieren», «notieren», «begründen», «vergleichen», «verändern».
 - Bei Aufgaben angeben, was festgehalten werden soll. Statt nur
@@ -59,10 +71,29 @@ Die bestehenden Texte wurden an diese Konventionen angepasst.
   benutzen. Präzision geht vor stilistischer Abwechslung.
 - «Ausdruck», «Wert», «Ausgabe», «Zuweisung» und «Variable» nicht als
   austauschbare Wörter verwenden.
+- **«Ausgewerteter Ausdruck» und «Wert» sind in unserem Unterrichtsmodell
+  Synonyme.** Dies bei der Einführung ausdrücklich erklären. Den anderen
+  Fall als «unausgewerteten Ausdruck» bezeichnen, nicht als «Rechnung» oder
+  «offene Rechnung». Für einen Teil eines Ausdrucks «Teilausdruck» verwenden.
+- «Auswertungsprotokoll» statt «Spur», «Einsetzspur» oder «Reduktionsspur»
+  verwenden. Es hält den Ausgangsausdruck und die einzelnen Schritte bis
+  zu einem Wert oder Fehler fest. Bei allgemeiner Anweisungs- oder
+  Befehlsausführung von einem «Ablaufprotokoll» sprechen.
+- «Speicherzustand» bezeichnet die aktuellen Inhalte, «Speicherprotokoll»
+  deren zeitliche Entwicklung. «Ausgabeprotokoll» bleibt die Bezeichnung
+  für bereits ausgegebene Texte.
+- Ausdrücke werden im dargestellten Programm an Ort und Stelle ersetzt.
+  Keine separate Arbeitskopie und keinen «wartenden Ausdruck» als
+  zusätzliches Konzept verlangen. Der umgebende Ausdruck bleibt sichtbar.
 - Das vereinbarte Box-Modell verwenden: «Der Wert wird in der Variable
   gespeichert» und «Der gespeicherte Wert wird gelesen», nicht «Der Name wird
-  an einen Wert gebunden». In Tabellen «Variable» und «gespeicherter Wert»
-  statt «Bindung» verwenden. Geltungsbereich und Grenzen stehen in der
+  an einen Wert gebunden». Speicherzustände als Block mit optionalen
+  Unterblöcken «Variablen» und «Funktionen» darstellen: Name-Wert-Paare und
+  vollständige statische Definitionen, keine Zuweisungen als Zustandsnotation.
+  Das bekannte Speicherprotokoll mit Variablennamen als Spalten bleibt
+  für Verläufe erhalten. Darstellung steht in den
+  [Speicherregeln](lecture-didactics.md#speicherzustand-und-speicherprotokoll);
+  Geltungsbereich und Grenzen stehen in der
   [didaktischen Festlegung](lecture-didactics.md#festlegung-werte-werden-in-variablen-gespeichert).
 - «Parameter» für die Definition, «Argument» für den Aufruf verwenden.
 - Die angebotene **notionale Maschine** vom individuellen **mentalen Modell**

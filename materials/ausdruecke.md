@@ -1,280 +1,222 @@
 <!--
 author:   Cedric Vogel
-version:  0.2.0
+version:  1.0.0
 language: de
 
-comment:  Ausdrücke schrittweise auswerten: vorhersagen, erklären und mit Python prüfen.
+comment:  Ausdrücke, Auswertung und vorgegebene Speicher: vorhersagen, erklären und mit Python prüfen.
 
 import: https://raw.githubusercontent.com/cedricvogel-leo/glpython-liascript/main/README.md
 -->
 
-# Ausdrücke — was rechnet Python als Nächstes?
+# Ausdrücke — Schritt für Schritt zum Wert
 
 [Im LiaScript-Reader öffnen](https://liascript.github.io/course/?https://raw.githubusercontent.com/cedricvogel-leo/programmieren-mit-funktionen/main/materials/ausdruecke.md)
 
-Sie haben bereits mit Snap! und Python programmiert. Jetzt untersuchen wir
-genauer, **wie ein Ausdruck ausgewertet wird**.
+Wie wird ein Ausdruck schrittweise zu einem Wert? Und welche Rolle spielen
+die gespeicherten Werte der Variablen?
 
-Nach dieser Lektion können Sie:
+Nach diesem Einstieg können Sie:
 
-- Ausdrücke von Zuweisungsanweisungen unterscheiden;
-- einen Wert von einer noch offenen Rechnung unterscheiden;
-- den nächsten Auswertungsschritt begründen;
-- erklären, was bei einem Schritt unverändert bleibt;
-- erkennen, wenn eine Auswertung zu einem Fehler statt zu einem Wert führt.
+- Ausdrücke anhand ihrer Merkmale beschreiben und einordnen;
+- den nächsten Auswertungsschritt mit einer Regel begründen;
+- den unveränderten Teil eines Ausdrucks benennen;
+- einen Wert aus einem vorgegebenen Speicher lesen und im Ausdruck einsetzen;
+- erklären, warum eine Auswertung mit einem Fehler enden kann.
 
-Arbeiten Sie zuerst ohne Ausführen-Schaltfläche. Tragen Sie Ihre Vorhersagen
-in die Quizfelder ein und notieren Sie Ihre Begründungen auf Papier oder in
-Ihren Notizen. Vergleichen Sie anschliessend Ihre Erklärungen miteinander.
-Erst danach prüfen Sie Ihre Quizantworten oder führen Python aus.
+## 1. Ausdrücke
 
-Die Quizfelder geben Rückmeldung zu Ihren Antworten. Hinweise helfen bei
-Bedarf weiter. Eine richtige Auswahl ersetzt nicht die Begründung.
-Die Aufgaben-Checkboxen haken Sie selbst ab; sie bewerten Ihre Erklärung nicht.
+Wir betrachten Werte und Ausdrücke, in denen **Operatoren**
+Teilausdrücke miteinander verbinden.
 
-Die Python-Felder sind im LiaScript-Reader ausführbar. Auf GitHub sind sie
-nur Text. Zum Laden der Laufzeit benötigen Sie eine Internetverbindung;
-eine eigene Python-Installation ist nicht nötig.
+Die Werte in unseren Beispielen sind Zahlen, Zeichenketten und
+Wahrheitswerte. Operatoren sind zum Beispiel `+`, `-`, `>` und `==`.
 
-## 1. Erst vorhersagen
+<!-- data-type="none" data-sortable="false" -->
+| A | B |
+| --- | --- |
+| `2 + 3` | `5` |
+| `"Hal" + "lo"` | `"Hallo"` |
+| `3 < 5` | `True` |
 
-Welchen Wert haben diese Ausdrücke? Tragen Sie für die ersten beiden
-Ausdrücke jeweils nur die Ergebniszahl ein.
+Beschreiben Sie den Unterschied zwischen den Ausdrücken in Spalte A und
+den Ausdrücken in Spalte B.
 
-**`2 + 3 * 4`**
+[[___ ___ ___]]
 
-[[14]]
-[[?]] Welche Operation hat Vorrang: Addition oder Multiplikation?
-***
-Zuerst `3 * 4 → 12`, dann `2 + 12 → 14`.
-***
+<details>
+<summary>Musterlösung</summary>
 
-**`(2 + 3) * 4`**
+In Spalte A stehen **unausgewertete Ausdrücke**. Es sind noch Operationen
+auszuführen.
 
-[[20]]
-[[?]] Welche Teilrechnung wird durch die Klammern zusammengefasst?
-***
-Zuerst `2 + 3 → 5`, dann `5 * 4 → 20`.
-***
+In Spalte B stehen **ausgewertete Ausdrücke**. Es sind keine Operationen
+mehr auszuführen. Wir nennen diese Ausdrücke auch **Werte**.
+«Ausgewerteter Ausdruck» und «Wert» bedeuten dasselbe.
 
-**`"2" + "3"` — wählen Sie den Ergebniswert mit der passenden Wertart.**
+In `2 + 3` sind die Teilausdrücke `2` und `3` bereits Werte. Der gesamte
+Ausdruck ist aber noch unausgewertet, weil die Addition noch auszuführen ist.
 
-- [( )] Die Zahl `5`.
-- [( )] Die Zahl `23`.
-- [(X)] Die Zeichenkette `"23"`.
-- [( )] Es entsteht ein Fehler.
-[[?]] Die Anführungszeichen kennzeichnen Zeichenketten.
-***
-`+` verknüpft hier zwei Zeichenketten. Das Ergebnis ist `"23"`, nicht die
-Zahl `23`. Die reine Ausgabe durch `print` zeigt diesen Unterschied nicht.
-***
+</details>
 
-- [ ] Ich habe zu jeder Vorhersage eine Begründung notiert.
+## 2. Auswerten von Ausdrücken
 
-**Vergleichen Sie:** Falls Sie verschiedene Ergebnisse erhalten haben,
-markieren Sie den Schritt, an dem sich Ihre Erklärungen unterscheiden.
+Beim Auswerten werden Teilausdrücke **an Ort und Stelle durch ihre Werte
+ersetzt**. Der umgebende Ausdruck bleibt erhalten.
 
-Prüfen Sie erst jetzt:
+> **Klammern und Operatorrangfolge**
+>
+> Klammern legen fest, welche Teilausdrücke zusammengehören. Ohne
+> zusätzliche Klammern gilt für die hier verwendeten Operatoren:
+>
+> - `*`, `/`, `//` und `%` haben Vorrang vor `+` und `-`.
+> - `+` und `-` haben Vorrang vor Vergleichen wie `<`, `>` und `==`.
+> - Gleichrangige arithmetische Operatoren werden von links nach rechts
+>   gruppiert: `8 - 3 - 1` bedeutet `(8 - 3) - 1`.
+>
+> Klammern bestimmen die Gruppierung, nicht pauschal den nächsten Schritt.
+
+> **Anleitung zum Auswerten**
+>
+> 1. Ist der Ausdruck bereits ein Wert, sind Sie fertig.
+> 2. Bestimmen Sie anhand der Klammern und der Operatorrangfolge die
+>    **äussere Operation**: die Operation, die zuletzt ausgeführt wird.
+> 3. Werten Sie deren linken Teilausdruck mit dieser Anleitung aus.
+> 4. Werten Sie danach deren rechten Teilausdruck mit dieser Anleitung aus.
+> 5. Führen Sie die äussere Operation mit den beiden Werten aus.
+>
+> Ersetzen Sie ausgewertete Teilausdrücke jeweils an Ort und Stelle durch
+> ihren Wert. Der umgebende Ausdruck bleibt erhalten. Ist eine Operation
+> für die Werte nicht erlaubt, endet die Auswertung mit einem Fehler.
+
+Ein Wert muss nicht erneut ausgewertet werden.
+Ein **Auswertungsprotokoll** hält den Ausgangsausdruck und jeden Schritt
+bis zu einem Wert oder Fehler fest.
+Der Pfeil `→` beschreibt einen Auswertungsschritt. Er ist **kein
+Python-Operator**. Sie können ihn in Ihren Eingabefeldern auch als `->`
+schreiben. Klammern um einen einzelnen Wert lassen wir weg.
+
+In `2 + 3 * 4` ist die Addition die äussere Operation. Ihre unmittelbaren
+Teilausdrücke sind `2` und `3 * 4`. `2` ist bereits ein Wert. Deshalb:
+
+```text
+2 + 3 * 4
+→ 2 + 12
+→ 14
+```
+
+«Von links nach rechts» heisst also **nicht**, immer zuerst den am
+weitesten links geschriebenen Operator auszuführen.
+
+**Mit der Visualisierung vergleichen:** Drücken Sie ▷❘, um die
+Auswertungsschritte zu verfolgen.
 
 ```python
-print(2 + 3 * 4)
-print((2 + 3) * 4)
-print("2" + "3")
+2 + 3 * 4
+```
+@GLPython.visual
+
+### Zwei unausgewertete Teilausdrücke
+
+Lesen Sie den Ausdruck zunächst, ohne Python auszuführen:
+
+```python
+(2 + 3) * (4 + 5)
+```
+
+**Welcher Ausdruck steht nach genau einem Schritt da?**
+
+- [( )] `(2 + 3) * 9`
+- [(X)] `5 * (4 + 5)`
+- [( )] `5 * 9`
+- [( )] `45`
+[[?]] Die Multiplikation wartet auf zwei Summen. Welche davon steht links?
+***
+Zuerst wird `2 + 3` zu `5`. `5 * 9` wäre bereits der Stand nach zwei
+Schritten; `45` ist der endgültige Wert.
+***
+
+Schreiben Sie das Auswertungsprotokoll. Benennen Sie den Teil, der beim
+ersten Schritt unverändert bleibt.
+
+[[___ ___ ___ ___ ___]]
+
+**Danach prüfen:** Führen Sie den Code aus. `print(...)` zeigt das Ergebnis an.
+
+```python
+print((2 + 3) * (4 + 5))
 ```
 @GLPython.eval
 
 <details>
-<summary>Vergleich und Erklärung</summary>
+<summary>Auswertungsprotokoll und unveränderter Kontext</summary>
 
-Die Ausgaben lauten `14`, `20` und `23`.
+```text
+(2 + 3) * (4 + 5)
+→ 5 * (4 + 5)
+→ 5 * 9
+→ 45
+```
 
-- Im ersten Ausdruck wird das Produkt berechnet, bevor die Summe berechnet wird.
-- Im zweiten Ausdruck legen die Klammern die Summe als erste Rechnung fest.
-- Im dritten Ausdruck verbindet `+` zwei Zeichenketten. Der Wert ist `"23"`,
-  nicht die Zahl `23`. Bei `print` werden die Anführungszeichen nicht angezeigt.
-
-Ein richtiges Ergebnis ist ein Anfang. Entscheidend ist, dass Ihre Erklärung
-auch bei einem anderen Ausdruck funktioniert.
+Im ersten Schritt bleibt die Multiplikation mit `(4 + 5)` erhalten.
+Erst wenn beide Summen Werte sind, wird multipliziert.
 
 </details>
 
-## 2. Ausdruck, Wert oder Anweisung?
+Vergleichen Sie Ihr Protokoll mit der Lösung. Begründen Sie eine nötige
+Korrektur oder bestätigen Sie die Reihenfolge mit einer Regel.
 
-Ein **Ausdruck** ist ein Stück Programmtext, dessen Auswertung einen Wert
-liefern kann. Zum Beispiel liefert die Auswertung von `2 + 3` den Wert `5`.
+[[___ ___ ___]]
 
-Manche Ausdrücke schreiben schon unmittelbar einen Wert hin: `5`, `"Hallo"`
-oder `True`. Andere enthalten noch auszuführende Operationen oder Variablen,
-deren gespeicherter Wert gelesen werden muss.
+### Einen falschen Schritt erklären
 
-Ein Wert ist das bestimmte Ergebnis. Im Folgenden schreiben wir Werte mit
-Python-Notation hin, zum Beispiel `5` oder `"Hallo"`.
-
-Eine **Anweisung** legt einen Programmschritt fest. Die Zuweisung
-`preis = 2 + 3` ist eine Anweisung: Erst wird rechts der Ausdruck ausgewertet,
-dann wird das Ergebnis in der Variable `preis` gespeichert.
-
-### Ordnen Sie zu und begründen Sie
-
-Für diese Aufgabe ist in der Variable `preis` bereits die Zahl `5` gespeichert.
-
-Wählen Sie in jeder Zeile genau eine Kategorie:
-
-- **Wert direkt:** Ein Ausdruck schreibt unmittelbar einen Wert hin.
-- **Noch auswerten:** Ein Ausdruck enthält eine Operation oder liest eine Variable.
-- **Zuweisung:** Eine Anweisung speichert einen Wert.
-
-[[Wert direkt] [Noch auswerten] [Zuweisung]]
-[(X) ( ) ( )] `5`
-[( ) (X) ( )] `2 + 3`
-[( ) (X) ( )] `preis`
-[( ) (X) ( )] `preis == 5`
-[( ) ( ) (X)] `preis = 5`
-[(X) ( ) ( )] `"Hallo"`
-[[?]] Eine Zuweisung mit `=` ist kein Vergleich mit `==`.
-***
-
-| Programmtext | Einordnung |
-| --- | --- |
-| `5` | Ausdruck, der unmittelbar den Zahlenwert `5` hinschreibt. |
-| `2 + 3` | Ausdruck mit noch auszuführender Addition. Ergebnis: `5`. |
-| `preis` | Ausdruck, der den gespeicherten Wert einer Variable liest. Hier ergibt er `5`. |
-| `preis == 5` | Vergleichsausdruck. Hier ergibt er den Wahrheitswert `True`. |
-| `preis = 5` | Zuweisungsanweisung, kein Vergleichsausdruck. |
-| `"Hallo"` | Ausdruck, der unmittelbar einen Zeichenkettenwert hinschreibt. |
-
-Der Text `preis` ist nicht selbst die Zahl `5`. Er bezeichnet eine Variable,
-in der hier `5` gespeichert ist. In der Rechnung lesen wir diesen Wert.
-
-***
-
-**Begründen Sie:** Warum gehört `preis` nicht in dieselbe Kategorie wie `5`,
-obwohl beide hier denselben Wert ergeben?
-
-- [ ] Ich habe den Unterschied zwischen Variablenname und gespeichertem Wert erklärt.
-
-## 3. Unsere Auswertungsmaschine
-
-Wir verwenden ein vereinfachtes Modell dafür, wie Python unsere Ausdrücke
-auswertet. Ein solches menschenlesbares Modell heisst **notionale Maschine**.
-Es ist keine zusätzliche Software. Sie können seine Schritte selbst ausführen.
-
-Unsere Maschine betrachtet zunächst nur Zahlen, Zeichenketten, Variablen
-mit gespeicherten Werten und einfache Rechen- und Vergleichsoperationen.
-
-Sie zeigt zwei Dinge:
-
-1. **Variablen als Boxen:** Welcher Wert ist gerade in welcher Variable gespeichert?
-2. **Restlicher Ausdruck:** Was muss noch ausgewertet werden?
-
-### Regeln für unsere Beispiele
-
-- Steht eine Variable an der Reihe, lesen Sie ihren gespeicherten Wert.
-- Beachten Sie Klammern und die Rangfolge der Operationen: etwa Multiplikation
-  vor Addition. Bei `+` und `-` gleicher Rangstufe wird von links gruppiert.
-- Führen Sie eine Operation erst aus, wenn die benötigten Operanden als Werte
-  vorliegen.
-- Ersetzen Sie nur den ausgewerteten Teil durch sein Ergebnis. Der umgebende
-  Ausdruck bleibt unverändert.
-- Ist eine Variable noch nicht definiert oder eine Operation für diese Werte nicht erlaubt,
-  endet die Auswertung mit einem Fehler.
-
-**Unsere Schreibweise:** `→` bedeutet «wird im nächsten Schritt ausgewertet zu».
-Dieser Pfeil ist eine Erklärung auf Papier, kein Python-Operator.
-
-```text
-3 * (2 + 4)
-→ 3 * 6
-→ 18
-```
-
-Beim ersten Schritt wird nur `2 + 4` durch `6` ersetzt. Die Multiplikation
-mit `3` wartet noch. Die Klammern um die einzelne Zahl können wir weglassen.
-
-`→`, `=` und `==` bedeuten also Verschiedenes:
-
-| Zeichen | Bedeutung |
-| --- | --- |
-| `→` | Ein Auswertungsschritt in unserer Erklärung. |
-| `=` | Eine Zuweisung in Python. |
-| `==` | Ein Vergleich in Python, dessen Ergebnis `True` oder `False` ist. |
-
-Das Modell erklärt die Ausdrücke dieser Lektion, nicht schon alle Möglichkeiten
-von Python. Eigene Funktionen und ihre Aufrufe untersuchen wir später.
-
-## 4. Was bleibt bei einem Schritt stehen?
-
-Gegeben ist:
-
-```text
-10 - 2 * (1 + 2)
-```
-
-**Ihre Aufgabe:**
-
-1. Markieren Sie die Teilrechnung, die Sie als Nächstes auswerten.
-2. Schreiben Sie genau einen Pfeilschritt auf.
-3. Markieren Sie, welcher Teil unverändert geblieben ist.
-4. Ergänzen Sie die restlichen Schritte.
-
-**Welcher Ausdruck steht nach genau einem Auswertungsschritt da?**
-
-- [( )] `8 * (1 + 2)`
-- [(X)] `10 - 2 * 3`
-- [( )] `10 - 6`
-- [( )] `4`
-[[?]] Ersetzen Sie nur die nächste Teilrechnung. Das Endergebnis ist noch kein einzelner Schritt.
-***
-Nur `1 + 2` wird zu `3`. Der Kontext `10 - 2 * …` bleibt erhalten.
-`10 - 6` benötigt bereits zwei Rechenschritte, `4` drei.
-***
-
-Eine Person schlägt diesen Anfang vor:
+Eine Person schlägt vor:
 
 ```text
 10 - 2 * (1 + 2)
 → 8 * (1 + 2)
 ```
 
-**Erklären Sie:** Warum ist das kein erlaubter Schritt? Geben Sie nicht nur das
-richtige Endergebnis an.
+**Ihre Erklärung:** Warum ist der Schritt nicht erlaubt? Geben Sie den
+tatsächlich nächsten Teilausdruck, den korrekten nächsten Gesamtausdruck
+und den dabei unveränderten Teil an.
 
-- [ ] Ich habe die falsche Spur mit einer Regel widerlegt und meine vollständige Spur notiert.
-
-Prüfen Sie danach das Ergebnis:
-
-```python
-print(10 - 2 * (1 + 2))
-```
-@GLPython.eval
+[[___ ___ ___ ___]]
 
 <details>
-<summary>Lösung und Regelprüfung</summary>
+<summary>Regelprüfung</summary>
+
+Die `2` gehört zur Multiplikation. Deren Ergebnis muss vorliegen, bevor
+es von `10` abgezogen werden kann. Als Nächstes wird `1 + 2` ausgewertet:
 
 ```text
 10 - 2 * (1 + 2)
 → 10 - 2 * 3
-→ 10 - 6
-→ 4
 ```
 
-Zuerst wird die geklammerte Summe berechnet. `10 - 2 * …` bleibt dabei stehen.
-Danach wird das Produkt berechnet, zuletzt die Differenz.
-
-Der vorgeschlagene Schritt berechnet `10 - 2` zu früh: Die `2` ist ein
-Operand der Multiplikation, deren Ergebnis erst anschliessend von `10`
-abgezogen wird.
+Der Kontext `10 - 2 * …` bleibt erhalten.
 
 </details>
 
-### Jetzt verändern
+### Mit Klammern verändern
 
 Setzen Sie in `10 - 2 * 3` Klammern so, dass der Wert `24` entsteht.
-Notieren Sie zuerst die Auswertungsspur, ändern Sie dann das Python-Feld und
-prüfen Sie das Ergebnis.
+Zahlen und Operationen dürfen Sie nicht ändern.
+
+Schreiben Sie das Auswertungsprotokoll des veränderten Ausdrucks.
+Erklären Sie die neue Gruppierung.
+
+[[___ ___ ___ ___]]
+
+**Erst danach prüfen:** Ändern Sie nur den Ausdruck innerhalb von
+`print(...)` im folgenden Feld.
+
+```python
+print(10 - 2 * 3)
+```
+@GLPython.eval
 
 <details>
-<summary>Eine Lösung</summary>
+<summary>Eine passende Lösung</summary>
 
 ```text
 (10 - 2) * 3
@@ -282,398 +224,426 @@ prüfen Sie das Ergebnis.
 → 24
 ```
 
-Nicht die Zahlen oder Operationen wurden geändert, sondern ihre Gruppierung.
+Die Klammern machen `10 - 2` zu einem Teilausdruck der Multiplikation.
+Ohne diese Klammern ergibt der ursprüngliche Ausdruck `4`.
 
 </details>
 
-## 5. Werte speichern, nicht Gleichungen
+**Nach der Prüfung:** Halten Sie eine nötige Änderung fest oder begründen
+Sie, warum Ihr Entwurf bereits passt.
 
-Lesen Sie dieses Programm, ohne es auszuführen:
+[[___ ___ ___]]
+
+### Wenn eine Operation nicht passt
+
+`"3" + "2"` ergibt die Zeichenkette `"32"`. `3 + 2` ergibt die Zahl `5`.
+Aber was geschieht hier?
 
 ```python
-a = 3
-b = a + 1
-a = 8
-print(b)
-print(a + b)
+"3" + 2
+```
+
+**Ihre Vorhersage:**
+
+- [( )] Der Wert ist die Zahl `5`.
+- [( )] Der Wert ist die Zeichenkette `"32"`.
+- [(X)] Die Auswertung endet mit einem Fehler.
+***
+Die Operation `+` kann hier keine Zeichenkette mit einer Zahl verbinden.
+Die Auswertung endet mit `TypeError`, nicht mit einem Wert.
+***
+
+**Ihre Begründung:** Beide Teilausdrücke sind bereits Werte. Warum reicht
+das trotzdem nicht, um die Addition auszuführen?
+
+[[___ ___ ___]]
+
+**Jetzt prüfen — dieser Block enthält absichtlich einen Fehler:**
+
+```python
+print("3" + 2)
 ```
 @GLPython.eval
 
-**Vorhersage:** Welche zwei Ausgaben entstehen?
+**Nach der Prüfung:** Erklären Sie, was die Fehlerart `TypeError` hier
+bedeutet. Ändern Sie bei Bedarf Ihre erste Erklärung, nicht die Aufgabe.
 
-Füllen Sie zunächst die Tabelle der gespeicherten Werte für die drei Zuweisungen aus:
+[[___ ___ ___]]
 
-| Nach der Anweisung | Wert von `a` | Wert von `b` |
-| --- | --- | --- |
-| `a = 3` | | noch nicht definiert |
-| `b = a + 1` | | |
-| `a = 8` | | |
+## 3. Speicher
 
-**Welche Werte sind nach den drei Zuweisungen gespeichert?**
+Variablen sind **benannte Boxen**, in denen Werte gespeichert sind.
 
-- [(X)] In `a` ist `8` gespeichert, in `b` ist `4` gespeichert.
-- [( )] In `a` ist `8` gespeichert, in `b` ist `9` gespeichert.
-- [( )] In `a` ist `3` gespeichert, in `b` ist `4` gespeichert.
-[[?]] In `b` wird ein berechneter Wert gespeichert, keine dauerhaft nachzurechnende Formel.
+> **Speicher**
+>
+> > **Variablen**
+> >
+> > ```text
+> > anzahl    3
+> > preis     5
+> > name      "Ada"
+> > ```
+
+`preis` ist der Name einer Variable, nicht selbst die Zahl `5`.
+Die Box enthält hier den Wert `5`. Sie enthält nicht die noch
+unausgewertete Formel, aus der dieser Wert vielleicht einmal entstanden ist.
+Wie Werte gespeichert oder verändert werden, untersuchen wir später.
+
+**Den Speicher lesen**
+
+**Welcher Wert ist in `name` gespeichert?**
+
+- [( )] Die Zeichenkette `"name"`.
+- [(X)] Die Zeichenkette `"Ada"`.
+- [( )] Die Variable enthält noch keinen Wert.
 ***
-Bei `b = a + 1` ist in `a` noch `3` gespeichert. Deshalb wird `4` in `b`
-gespeichert. Die spätere Zuweisung an `a` ändert diesen Wert in `b` nicht.
+Neben dem Variablennamen `name` steht der gespeicherte
+Zeichenkettenwert `"Ada"`.
 ***
 
-Tragen Sie jeweils nur die Ausgabezahl ein:
+**Ihre Erklärung:** Worin unterscheiden sich `preis`, `5` und `"preis"`?
+Verwenden Sie die Begriffe «Variable», «Zahlenwert» und «Zeichenkettenwert».
 
-**Erste Ausgabe: `print(b)`**
-
-[[4]]
-
-**Zweite Ausgabe: `print(a + b)`**
-
-[[12]]
-[[?]] Lesen Sie die zuletzt gespeicherten Werte aus beiden Variablen.
-
-Schreiben Sie dann die Auswertung des letzten Ausdrucks `a + b` schrittweise auf.
-Führen Sie erst danach das Programm aus.
+[[___ ___ ___]]
 
 <details>
-<summary>Lösung und typische Fehlvorstellung</summary>
+<summary>Mit der Erklärung vergleichen</summary>
 
-| Nach der Anweisung | Wert von `a` | Wert von `b` |
-| --- | --- | --- |
-| `a = 3` | `3` | noch nicht definiert |
-| `b = a + 1` | `3` | `4` |
-| `a = 8` | `8` | `4` |
+`preis` bezeichnet eine Variable. `5` ist ein Zahlenwert.
+`"preis"` ist ein Zeichenkettenwert, der die Buchstaben des Wortes enthält.
+Die Anführungszeichen machen einen Unterschied.
 
-Für die zweite Zuweisung wird `a + 1 → 3 + 1 → 4` ausgewertet.
-In `b` wird dieser Wert gespeichert, keine dauerhaft nachzurechnende Formel.
+</details>
 
-Am Ende gilt:
+**Ihre Ergänzung:** Halten Sie eine Korrektur fest oder erklären Sie den
+Unterschied noch einmal an `name` und `"name"`.
+
+[[___ ___ ___]]
+
+## 4. Auswerten im Kontext eines Speichers
+
+Beim Auswerten einer Variable wird ihr gespeicherter Wert gelesen und
+an ihrer Stelle im Ausdruck eingesetzt. **Das Lesen verändert den Speicher
+nicht.**
+
+> **Speicher**
+>
+> > **Variablen**
+> >
+> > ```text
+> > n    4
+> > ```
 
 ```text
-a + b
-→ 8 + b
-→ 8 + 4
-→ 12
+2 * (n + 3) - 1
+→ 2 * (4 + 3) - 1
+→ 2 * 7 - 1
+→ 14 - 1
+→ 13
 ```
 
-Die Ausgaben sind `4` und `12`. Die spätere Zuweisung an `a` ändert `b` nicht.
+Zuerst lesen wir `n`. Der Kontext `2 * (… + 3) - 1` bleibt dabei erhalten.
+Während der gesamten Auswertung bleibt in `n` der Wert `4` gespeichert.
 
-</details>
+### Zwei Variablen lesen
 
-### Transfer
+> **Speicher**
+>
+> > **Variablen**
+> >
+> > ```text
+> > a    8
+> > b    4
+> > ```
 
-Was ändert sich, wenn Sie **nach** `a = 8` eine weitere Anweisung
-`b = a + 1` einfügen? Erklären Sie die Änderung zuerst mit dem Modell.
-Prüfen Sie anschliessend Ihre Vorhersage.
+Lesen Sie den Ausdruck:
+
+```python
+a + b * 2
+```
+
+**Welcher Ausdruck folgt nach genau einem Schritt?**
+
+- [(X)] `8 + b * 2`
+- [( )] `a + 4 * 2`
+- [( )] `a + 8`
+- [( )] `16`
+[[?]] Die äussere Addition braucht die Werte von `a` und `b * 2`. Lesen Sie zuerst den linken Teilausdruck.
+***
+Zuerst wird `a` gelesen. Erst danach wird `b * 2` ausgewertet.
+Die Regel lautet nicht «zuerst alle Variablen ersetzen» und auch nicht
+«Multiplikation vor jedem Lesen».
+***
+
+Schreiben Sie das Auswertungsprotokoll. Benennen Sie den beim ersten
+Schritt unveränderten Teil und die danach in `a` und `b` gespeicherten Werte.
+
+[[___ ___ ___ ___ ___ ___]]
+
+**Danach prüfen:** Führen Sie den Code aus. Die ersten beiden Zeilen
+stellen den vorgegebenen Speicher bereit; `print(...)` zeigt das Ergebnis.
+
+```python
+a = 8
+b = 4
+print(a + b * 2)
+```
+@GLPython.eval
 
 <details>
-<summary>Vergleich</summary>
+<summary>Auswertungsprotokoll</summary>
 
-Die neu hinzugefügte Anweisung wertet `a + 1` mit dem jetzt gültigen Wert
-von `a` aus: `8 + 1 → 9`. Danach ist in `b` der Wert `9` gespeichert.
-Die Ausgaben ändern sich zu `9` und `17`.
+```text
+a + b * 2
+→ 8 + b * 2
+→ 8 + 4 * 2
+→ 8 + 8
+→ 16
+```
+
+Beim ersten Schritt bleibt `… + b * 2` erhalten.
+Im Speicher stehen weiterhin `a`: `8` und `b`: `4`.
+In `a` wird nicht das Ergebnis `16` gespeichert.
 
 </details>
 
-## 6. Werte können auch Zeichenketten und Wahrheitswerte sein
+**Ihre Regelprüfung:** Welche Ihrer Schritte stimmen überein? Falls Sie
+etwas korrigieren, nennen Sie die dazugehörige Regel.
 
-Notieren Sie zu jedem Ausdruck eine Spur. Tragen Sie anschliessend den
-Ergebniswert ein beziehungsweise wählen Sie ihn aus.
-In dieser Aufgabe ist in der Variable `name` der Wert `"Ada"` gespeichert.
+[[___ ___ ___]]
 
-**`"Hallo, " + name`**
+### Gleicher Ausdruck, anderer Speicher
 
-- [( )] Die Zeichenkette `"Hallo, name"`.
-- [(X)] Die Zeichenkette `"Hallo, Ada"`.
-- [( )] Es entsteht ein Fehler.
+Betrachten Sie zwei **getrennt vorgegebene** Speicher. Wir führen keine
+Anweisungen aus, um von einem zum anderen zu gelangen.
 
-**`3 + 2 == 5`**
+> **Speicher A**
+>
+> > **Variablen**
+> >
+> > ```text
+> > name    "Ada"
+> > ```
 
-- [(X)] `True`
-- [( )] `False`
-- [( )] `5`
-[[?]] Nach der Addition ist noch ein Vergleich auszuwerten.
+> **Speicher B**
+>
+> > **Variablen**
+> >
+> > ```text
+> > name    "Mia"
+> > ```
 
-**`7 // 2` — tragen Sie nur die Ergebniszahl ein.**
+Für beide Speicher lautet der Ausdruck:
 
-[[3]]
+```python
+"Hallo, " + name
+```
 
-**`-3 // 2` — tragen Sie nur die Ergebniszahl ein.**
+Schreiben Sie für A und B jeweils das Auswertungsprotokoll.
+Verwenden Sie Anführungszeichen für Zeichenkettenwerte. Erklären Sie
+die unterschiedlichen Ergebnisse.
 
-[[-2]]
-[[?]] `//` rundet nach unten, nicht allgemein in Richtung null.
-***
-Der Quotient ist `-1.5`. Die nächste ganze Zahl darunter ist `-2`.
-***
+[[___ ___ ___ ___ ___]]
+
+**Jetzt prüfen:** Der Block ist für Speicher A vorbereitet. Führen Sie ihn
+aus. Setzen Sie danach in der ersten Zeile `"Mia"` statt `"Ada"` ein, um
+unabhängig davon Speicher B zu prüfen. Weitere Änderungen sind nicht nötig.
 
 ```python
 name = "Ada"
 print("Hallo, " + name)
-print(3 + 2 == 5)
-print(7 // 2)
-print(-3 // 2)
 ```
 @GLPython.eval
 
 <details>
-<summary>Lösung</summary>
+<summary>Beide Auswertungsprotokolle vergleichen</summary>
 
 ```text
+Speicher A:
 "Hallo, " + name → "Hallo, " + "Ada" → "Hallo, Ada"
-3 + 2 == 5 → 5 == 5 → True
-7 // 2 → 3
--3 // 2 → -2
+
+Speicher B:
+"Hallo, " + name → "Hallo, " + "Mia" → "Hallo, Mia"
 ```
 
-`//` rundet den Quotienten nach unten. Bei `-1.5` ist das `-2`, nicht `-1`.
-Ein Vergleich liefert einen Wahrheitswert, hier `True`.
-
-Wir haben `-3` bereits als geschriebenen negativen Zahlenwert behandelt;
-unser Modell zeigt nicht jeden internen Python-Auswertungsschritt einzeln.
+Das Lesen liefert je nach vorgegebenem Speicher einen anderen Wert.
+Der jeweilige Speicher bleibt während der Ausdrucksauswertung unverändert.
+Die Anzeige durch `print` zeigt Zeichenketten ohne die Anführungszeichen.
 
 </details>
 
-## 7. Nicht jede Auswertung liefert einen Wert
+**Nach der Prüfung:** Begründen Sie eine Korrektur oder erklären Sie,
+warum das Lesen den jeweiligen Speicher nicht verändert.
 
-Vergleichen Sie:
+[[___ ___ ___]]
+
+### Wenn ein Name fehlt
+
+> **Speicher**
+>
+> > **Variablen**
+> >
+> > ```text
+> > preis    5
+> > ```
+
+Eine Variable `fehlender_name` ist nicht vorhanden.
+
+```python
+fehlender_name + 1
+```
+
+**Ihre Vorhersage:**
+
+- [( )] Der Ausdruck ergibt `1`, weil fehlende Namen den Wert `0` liefern.
+- [(X)] Die Auswertung endet beim Lesen mit `NameError`.
+- [( )] Es entsteht derselbe `TypeError` wie bei `"3" + 2`.
+***
+Für `fehlender_name` kann kein gespeicherter Wert gelesen werden.
+Die Addition kann deshalb noch gar nicht ausgeführt werden.
+***
+
+**Ihre Erklärung:** Vergleichen Sie `fehlender_name + 1` mit `"3" + 2`.
+Beim zweiten Ausdruck sind beide Teilausdrücke bereits Werte. Warum
+scheitern die Auswertungen an unterschiedlichen Schritten?
+
+[[___ ___ ___]]
+
+**Jetzt prüfen — auch dieser Fehler ist beabsichtigt:**
+
+```python
+preis = 5
+print(fehlender_name + 1)
+```
+@GLPython.eval
+
+**Nach der Prüfung:** Beschreiben Sie, an welchem Schritt die jeweilige
+Auswertung endet. Korrigieren Sie Ihre erste Erklärung bei Bedarf hier.
+
+[[___ ___ ___]]
+
+### Abschluss
+
+Bearbeiten Sie den folgenden Transfer zunächst **ohne Python-Ausführung**.
+Nutzen Sie nur den vorgegebenen Speicher und unsere Regeln:
+
+> **Speicher**
+>
+> > **Variablen**
+> >
+> > ```text
+> > x    2
+> > y    5
+> > ```
+
+```python
+(x + 3) * (y - 1)
+```
+
+Schreiben Sie das Auswertungsprotokoll. Benennen Sie den zuerst
+ausgewerteten Teilausdruck und für einen Schritt den unveränderten Kontext.
+Erklären Sie, was währenddessen mit dem Speicher geschieht.
+
+[[___ ___ ___ ___ ___ ___ ___]]
+
+**Welchen Ergebniswert haben Sie erhalten?**
+
+[[20]]
+[[?]] Werten Sie erst den linken Teilausdruck der Multiplikation vollständig aus, dann den rechten.
+***
+Beide Teilausdrücke werden zu Werten: `5` und `4`. Die Multiplikation
+ergibt danach `20`. Das vollständige Protokoll steht in der Selbstkontrolle.
+***
+
+**Erst jetzt mit Python vergleichen:**
+
+```python
+x = 2
+y = 5
+print((x + 3) * (y - 1))
+```
+@GLPython.eval
+
+<details>
+<summary>Selbstkontrolle</summary>
 
 ```text
-"3" + "2"
-3 + 2
-"3" + 2
+(x + 3) * (y - 1)
+→ (2 + 3) * (y - 1)
+→ 5 * (y - 1)
+→ 5 * (5 - 1)
+→ 5 * 4
+→ 20
 ```
 
-Welche Auswertungen sind möglich? Wo entsteht ein Fehler? Begründen Sie anhand der
-Werte, mit denen die Operation arbeiten soll.
-
-**Wählen Sie alle Ausdrücke aus, deren Auswertung einen Wert liefert.**
-
-- [[X]] `"3" + "2"`
-- [[X]] `3 + 2`
-- [[ ]] `"3" + 2`
-[[?]] Prüfen Sie, welche Wertarten als Operanden von `+` zusammenpassen.
-***
-Die ersten beiden Ausdrücke ergeben `"32"` beziehungsweise `5`.
-Der dritte Ausdruck verbindet eine Zeichenkette mit einer Zahl; dies führt
-hier zu `TypeError`.
-***
-
-Dieses Python-Beispiel enthält **absichtlich einen Fehler**. Notieren Sie
-auch, welche Ausgaben Sie davor erwarten und ob die letzte Zeile erreicht wird.
-
-**Welche Ausgabe beziehungsweise welcher Fehlerverlauf ist zu erwarten?**
-
-- [( )] Ausgaben `32`, `5`, `32` und `Ende`; kein Fehler.
-- [( )] Sofort ein `TypeError`, ohne vorherige Ausgabe.
-- [(X)] Ausgaben `32` und `5`, danach `TypeError`; keine Ausgabe `Ende`.
-- [( )] Ausgaben `32` und `5`, danach `NameError`; keine Ausgabe `Ende`.
-***
-Die ersten beiden Zeilen werden ausgeführt. Der Fehler entsteht erst bei
-der dritten Addition. Danach wird die letzte Anweisung nicht mehr erreicht.
-***
-
-```python
-print("3" + "2")
-print(3 + 2)
-print("3" + 2)
-print("Ende")
-```
-@GLPython.eval
-
-<details>
-<summary>Lösung und Bedeutung der Fehlermeldung</summary>
-
-Zuerst erscheinen `32` und `5`.
-Danach trifft `+` auf eine Zeichenkette und eine Zahl. Python verbindet diese
-beiden Werte nicht automatisch. Es entsteht ein `TypeError`.
-Die Ausgabe `Ende` wird nicht mehr erreicht.
-
-Der Text der Fehlermeldung kann je nach Laufzeit abweichen. Wichtig sind die
-Fehlerart und die Erklärung: Diese Operanden passen hier nicht zusammen.
-
-**Gezielte Änderung:** Wenn eine Verkettung gemeint ist, ändern Sie die Zahl zu
-`"2"`. Wenn eine Addition gemeint ist, ändern Sie die Zeichenkette zu `3`.
-Prüfen Sie beide Varianten getrennt. Eine Reparatur braucht also eine Entscheidung
-darüber, was berechnet werden soll.
+Zuerst wird `x` gelesen. Beim ersten Schritt bleibt
+`(… + 3) * (y - 1)` erhalten. Nach der linken Summe ist der rechte
+Teilausdruck an der Reihe. Im Speicher bleiben `x`: `2` und `y`: `5`.
 
 </details>
 
-### Unbekannter Name
+**Nach dem Vergleich:** Ergänzen Sie:
 
-Jedes Codefeld dieser Lektion hat eine eigene Laufzeit. In diesem Feld
-wurde die Variable `unbekannter_preis` noch nicht definiert.
-
-**Was geschieht beim Versuch, `unbekannter_preis + 1` auszuwerten?**
-
-- [( )] Der Wert ist `1`, weil eine unbekannte Variable automatisch `0` enthält.
-- [(X)] Es entsteht ein `NameError`, bevor die Addition ausgeführt werden kann.
-- [( )] Es entsteht ein `TypeError`, weil Zeichenketten und Zahlen gemischt werden.
-***
-Die Variable wurde noch nicht definiert. Es kann kein gespeicherter Wert
-gelesen werden. Dieser Fehler ist vom Zusammenrechnen unpassender Wertarten
-zu unterscheiden.
-***
-
-```python
-print(unbekannter_preis + 1)
-```
-@GLPython.eval
-
-<details>
-<summary>Erklären statt raten</summary>
-
-Beim Versuch, den Wert von `unbekannter_preis` zu lesen, entsteht ein `NameError`.
-Diese Variable wurde hier noch nicht definiert. Python nimmt nicht automatisch `0`
-an. Deshalb kann auch die Addition nicht ausgeführt werden.
-
-Die vollständige Auswertungsspur endet am Fehler; es gibt keinen Ergebniswert
-für den gesamten Ausdruck.
-
-</details>
-
-## 8. Abschluss — können Sie das Modell selbst anwenden?
-
-Bearbeiten Sie diese Aufgaben **ohne Python-Ausführung**. Verwenden Sie bei
-Ihren Erklärungen die Regeln unserer Maschine.
-
-1. Ordnen Sie `4`, `n + 2`, `n == 4` und `n = 4` ein:
-   Ausdruck oder Zuweisungsanweisung? Welcher Ausdruck schreibt direkt einen
-   Wert hin?
-2. In `n` ist `4` gespeichert. Werten Sie `2 * (n + 3) - 1` schrittweise aus.
-   Markieren Sie bei einem Schritt den unveränderten Kontext.
-3. Nach `n = 4; m = n * 2; n = 1`: Welchen Wert hat `m`? Warum?
-4. Welche unterschiedliche Regel erklärt die Fehler in `"4" + 1` und
-   `fehlender_name + 1`, wenn diese Variable noch nicht definiert wurde?
-5. Erfinden Sie einen Ausdruck, bei dem Klammern das Ergebnis verändern.
-   Notieren Sie beide Spuren und erklären Sie den Unterschied.
-
-### Prüfen Sie ausgewählte Ergebnisse
-
-Halten Sie Ihre vollständigen Spuren und Begründungen fest, bevor Sie die
-Quizantworten prüfen.
-
-**Aufgabe 1: Welche Texte sind Ausdrücke? Wählen Sie alle passenden aus.**
-
-- [[X]] `4`
-- [[X]] `n + 2`
-- [[X]] `n == 4`
-- [[ ]] `n = 4`
-***
-Die ersten drei Texte sind Ausdrücke. Nur `4` schreibt unmittelbar einen
-Wert hin. `n = 4` ist eine Zuweisungsanweisung.
-***
-
-**Aufgabe 2: Welchen Wert ergibt `2 * (n + 3) - 1` für `n = 4`?
-Tragen Sie nur die Ergebniszahl ein.**
-
-[[13]]
-
-**Aufgabe 3: Welcher Wert ist am Ende in `m` gespeichert?
-Tragen Sie nur die Ergebniszahl ein.**
-
-[[8]]
-[[?]] Wird bei der späteren Zuweisung an `n` auch eine neue Zuweisung an `m` ausgeführt?
-
-**Aufgabe 4: Welche Erklärung unterscheidet die beiden Fehler?**
-
-- [( )] In beiden Fällen fehlt nur eine Klammer.
-- [( )] Beide Ausdrücke lesen eine nicht definierte Variable.
-- [(X)] Im ersten Fall passen die Wertarten nicht zusammen; im zweiten kann kein gespeicherter Variablenwert gelesen werden.
-***
-`"4" + 1` führt zu `TypeError`; die Verwendung der nicht definierten
-Variable `fehlender_name` führt zu `NameError`.
-***
-
-### Eigene Arbeit prüfen
-
-Diese Checkliste ist eine Selbsteinschätzung, keine automatische Bewertung.
-
-- [ ] Ich habe in Aufgabe 2 den nächsten Schritt und den unveränderten Kontext markiert.
-- [ ] Ich habe in Aufgabe 3 erklärt, warum die spätere Zuweisung den Wert in `m` nicht ändert.
-- [ ] Ich habe für Aufgabe 5 zwei eigene Auswertungsspuren und eine Erklärung notiert.
-
-Vergleichen Sie Ihre Begründungen miteinander. Prüfen Sie die selbst erfundenen Ausdrücke erst,
-wenn die Spuren festgehalten sind.
-
-<details>
-<summary>Selbstkontrolle für Aufgaben 1–4</summary>
-
-1. `4`, `n + 2` und `n == 4` sind Ausdrücke. `4` schreibt unmittelbar
-   einen Wert hin. `n = 4` ist eine Zuweisungsanweisung.
-2. Eine mögliche Spur ist:
-
-   ```text
-   2 * (n + 3) - 1
-   → 2 * (4 + 3) - 1
-   → 2 * 7 - 1
-   → 14 - 1
-   → 13
-   ```
-
-   Beim Ersetzen von `n` bleibt `2 * (… + 3) - 1` unverändert.
-3. In `m` ist `8` gespeichert. Das spätere Speichern von `1` in `n` wertet die
-   frühere rechte Seite nicht erneut aus.
-4. `"4" + 1` scheitert an nicht passenden Wertarten (`TypeError`).
-   `fehlender_name + 1` scheitert bereits beim Versuch, den Wert einer noch
-   nicht definierten Variable zu lesen (`NameError`).
-
-</details>
-
-### Mein Modell in einem Satz
-
-Vervollständigen Sie:
-
-> Beim Auswerten eines Ausdrucks bestimme ich zuerst …
+> «Ausgewerteter Ausdruck» und «Wert» …
 >
-> Nach einem Schritt bleibt …
+> Den nächsten Schritt finde ich, indem …
 >
-> Wenn ein Name oder eine Operation nicht passt, …
+> Beim Lesen einer Variable …
+>
+> Eine Erklärung, die ich bestätigt oder geändert habe, lautet …, weil …
 
-Notieren Sie zum Schluss eine Erklärung, die Sie heute geändert haben, und den
-Grund dafür. Eine begründete Korrektur zeigt mehr als ein geratenes Ergebnis.
+[[___ ___ ___ ___ ___ ___]]
 
-## Hinweise für Lehrkräfte
+### Hinweise für Lehrkräfte
 
-Diese Beispiellektion setzt den Ausdrucksteil von M1 um, nicht bereits das
-gesamte Modul A1 mit mathematischen Funktionsaufrufen.
-Sie bezieht sich auf EX1–EX3 sowie ausgewählte Voraussetzungen aus PY2 und PY4.
-Sie ersetzt keine vollständige Grundlagen-Diagnose.
+Dieser Einstieg behandelt ausschliesslich die ersten vier Konzepte der
+aktuellen [Outline](../docs/lecture-outline.md#ausdrücke), nicht bereits
+die vollständige Ausdrucks- und Einsetzmaschine mit Funktionsaufrufen.
+Er setzt bekannte arithmetische Operationen und erste Python-Erfahrung
+voraus, aber keine neu eingeführte Anweisungssemantik.
 
+<!-- data-type="none" data-sortable="false" -->
 | Lernziel | Lerngelegenheiten | Individueller Nachweis |
 | --- | --- | --- |
-| EX1: Ausdrücke erkennen | Abschnitt 2; Kontrast zwischen Ausdruck und Zuweisung. | Abschlussaufgabe 1 mit Begründung. |
-| EX2: Wert und offene Rechnung unterscheiden | Abschnitte 2–3; gespeicherte Variablenwerte und Restrechnung. | In Abschlussaufgabe 2 Zwischenausdrücke und Ergebnis unterscheiden. |
-| EX3: Schritte und Fehler begründen | Abschnitte 4–7; absichtlich fehlerhafte Spur und Programme. | Abschlussaufgaben 2–4 und eine eigene Kontrastspur in Aufgabe 5. |
+| EX1: Ausdrücke erkennen | Abschnitt 1; Beispiele mit Werten und Operationen, später mit Variablen. | Beschreibung der Spalten A und B; Bedeutung von `preis`, `5` und `"preis"`. |
+| EX2: Unausgewertete Ausdrücke und Werte unterscheiden | Abschnitt 1; Begriffe nach dem offenen A/B-Vergleich einführen. | Beschreibung des Unterschieds zwischen A und B und Abschlussreflexion. |
+| EX3: Schritte und Fehler begründen | Abschnitte 2 und 4; unmittelbare Teilausdrücke, Kontext, Lesen und Fehler. | Auswertungsprotokoll zur Transferaufgabe, unveränderter Speicher und Unterscheidung der Fehlerursachen. |
 
-Die Lektion verwendet native LiaScript-Text-, Auswahl- und Matrixquizze sowie
-Aufgaben-Checkboxen gemäss der
-[LiaScript-Dokumentation](https://github.com/LiaScript/docs/blob/master/README.md#quizzes).
-Die Quizze prüfen festgelegte Antworten, nicht die Qualität einer Begründung
-oder einer selbst erfundenen Auswertungsspur. Freie Erklärungen werden weiterhin
-auf Papier oder in eigenen Notizen festgehalten. Aufgaben-Checkboxen dienen
-der Selbsteinschätzung und sind keine bewerteten Quizantworten.
+Die Lektion verwendet native Quizze und
+[freie Texteingaben](https://github.com/LiaScript/docs/blob/master/README.md#text-inputs).
+Alle schriftlichen Aufträge haben einen Eingabeort im Kurs. Eine richtige
+Quizantwort weist weder ein vollständiges Auswertungsprotokoll noch eine passende Begründung
+nach. Offene Texte werden nicht automatisch bewertet oder an die Lehrkraft
+übermittelt. Vergleich und Rückmeldung müssen passend organisiert werden.
 
-Die Quizze erlauben erneute Versuche, Hinweise und das Anzeigen der Lösung.
-Native Lösungsblöcke werden nach erfolgreicher Prüfung oder Auflösen sichtbar;
-zusätzliche aufklappbare Erklärungen bleiben frei zugänglich.
-Es handelt sich um formative Selbstkontrolle, nicht um eine gesperrte Prüfung.
-Der öffentliche Reader-Link funktioniert erst, wenn
-diese Datei auf `main` veröffentlicht wurde. Für lokale Änderungen die Quelle
-im [LiaScript LiveEditor](https://liascript.github.io/LiveEditor/) öffnen.
+Vorhersagen und spätere Korrekturen haben getrennte Felder. Lösungen sind
+formative Hilfen und keine technisch gesperrten Prüfungsinhalte. Zum
+Benennen von Kontext und markiertem Teilausdruck genügen Texteingaben;
+eine grafische Markierfunktion wird nicht vorausgesetzt.
 
-`print` wird hier nur als bekanntes Mittel zum Sichtbarmachen verwendet.
-Dass `print` selbst ein Funktionsaufruf ist und `None` zurückgibt, gehört in die
-spätere Funktionslektion. Kein Ergebniswert entsteht allein dadurch, dass etwas
-angezeigt wird. Für `"23"` und `23` muss die Wertart ausdrücklich mitbenannt
-werden, weil die reine Ausgabe diesen Unterschied nicht zeigt.
+Die Zuweisungen in Prüfblöcken initialisieren nur den jeweils vorgegebenen
+Speicher. `print` macht Ergebnisse sichtbar. Beides wird nicht als neuer
+Lernstoff erklärt oder geprüft. Bei Zeichenketten müssen die Wertarten
+explizit benannt werden, weil die Ausgabe keine Anführungszeichen zeigt.
+Jeder ausführbare Block hat eine eigene Laufzeit und enthält seine
+benötigte Vorbereitung selbst.
 
-Die Pfeilspuren sind didaktische Darstellungen, keine Behauptung über einzelne
-Interpreterereignisse. GLPython prüft Resultate und Fehler; die manuelle Spur
-bleibt nötig, wenn das Werkzeug Teilausdrücke nicht entsprechend sichtbar macht.
+Die Auswertungsprotokolle zeigen Ersetzungen an Ort und Stelle im
+dargestellten Programm, keine Änderung der Quelldatei auf dem Datenträger
+und keine separate Arbeitskopie. Sie bilden nicht jedes Interpreterereignis ab.
+Die GLPython-Visualisierung zu
+`2 + 3 * 4` dient dem Vergleich, nicht als Definition unserer Schritte.
+Die Regeln gelten für den hier verwendeten strikten Teilbereich:
+Kurzschlussoperatoren, bedingte Ausdrücke und verkettete Vergleiche sind
+nicht enthalten.
+
+Für lokale Änderungen die Quelle im
+[LiaScript LiveEditor](https://liascript.github.io/LiveEditor/) öffnen.
+Der öffentliche Reader-Link zeigt erst nach Veröffentlichung auf `main`
+den neuen Stand.
 
 Planungsgrundlagen:
 [Outline](../docs/lecture-outline.md),
-[Didaktik](../docs/lecture-didactics.md),
+[Didaktik](../docs/lecture-didactics.md#aufgaben-vollständig-im-kurs-bearbeiten),
 [Agenda](../docs/lecture-agenda.md).
-Die Entscheidung für explizite Modellregeln und aktive Erklärungen folgt der
-dort eingeordneten Forschungsgrundlage; diese konkrete Lektion ist ein noch
-zu erprobender Unterrichtsentwurf.
+Diese konkrete Lektion bleibt ein zu erprobender Unterrichtsentwurf.

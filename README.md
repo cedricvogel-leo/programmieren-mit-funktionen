@@ -128,7 +128,8 @@ Ergebnisse: Ist eine Bedingung falsch, wird ein Fehler angezeigt.
 
 **Experiment:** Ersetzen Sie `return breite * hoehe` durch `print(breite * hoehe)`.
 Untersuchen Sie die Ausgabe und die Fehlermeldung. Ohne explizites `return` liefert
-eine Python-Funktion `None`; damit lässt sich hier nicht weiterrechnen.
+eine Python-Funktion `None`; damit lässt sich die Addition in diesem Beispiel
+nicht auswerten.
 Stellen Sie danach die funktionierende Version wieder her.
 
 ## 5. Lokale Variablen verfolgen

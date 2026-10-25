@@ -11,9 +11,45 @@ M1–M6 bezeichnen die Modelle in der [Didaktik](lecture-didactics.md).
 Beobachtungen werden in der [Modellmatrix](paradigmen-matrix-template.md)
 gesammelt.
 
-Vorgeschlagen sind kurze Lernzyklen mit Vorhersage, Handspur, Erklärung,
+Vorgeschlagen sind kurze Lernzyklen mit Vorhersage, selbst erstelltem Protokoll, Erklärung,
 Werkzeugvergleich und eigener Anwendung. Lehrkraftimpulse und längere
 Arbeitsphasen bleiben möglich; das endgültige Format ist nicht entschieden.
+
+### Vorgabe für die spätere Materialerstellung
+
+Unabhängig vom gewählten Unterrichtsformat müssen alle schriftlichen
+Aufgabenschritte direkt im LiaScript-Kurs bearbeitbar sein. Es gilt die
+zentrale Festlegung
+[Aufgaben vollständig im Kurs bearbeiten](lecture-didactics.md#aufgaben-vollständig-im-kurs-bearbeiten).
+«Von Hand» und Diagnosen ohne Ausführung verlangen keine Arbeit auf Papier:
+Eigene Auswertungs- oder Ablaufprotokolle, Vorhersagen und Begründungen
+erhalten Eingabefelder im Kurs.
+Für offene Texte sind keine automatische Bewertung oder Übermittlung an
+die Lehrkraft vorausgesetzt.
+
+Für jede später ausgearbeitete Aufgabe prüfen:
+
+- Hat jeder schriftliche Arbeitsschritt einen passenden Eingabeort?
+  Eine Task-Checkbox allein genügt nicht als Antwortnachweis.
+- Bleiben Code, vorgegebener Speicher, alle Aktivitäten und Prüfblock einer
+  Aufgabe auf derselben LiaScript-Seite? Innerhalb der Aufgabe fett gesetzte
+  Beschriftungen statt weiterer Markdown-Überschriften verwenden.
+- Sind die Aufträge knapp und ohne allgemeine Vorgehenspräambel verständlich?
+  Fachliche Regeln erklären, die Absicht der Modellbildung kaum thematisieren.
+- Erscheint der Speicher als Block mit optionalen Unterblöcken «Variablen»
+  und «Funktionen» gemäss den
+  [Speicherregeln](lecture-didactics.md#speicherzustand-und-speicherprotokoll)?
+  Speicherprotokolle zeigen den Verlauf und behalten ihre bekannte
+  Spaltenanordnung; Diagramme und Sortierung werden abgeschaltet.
+- Sind ursprüngliche Vorhersage und spätere Überarbeitung getrennt
+  festhaltbar?
+- Steht anfangs nur zu lesender Code in einem Python-Codeblock ohne
+  GLPython-Makro, während der ausführbare Block erst beim Prüfschritt folgt?
+  Das ist eine didaktische Reihenfolge, keine technische Sperre.
+- Enthält der Prüfblock alle benötigten Definitionen und Ausgangswerte,
+  sodass er unabhängig von anderen Blöcken ausführbar ist?
+- Sind Eingaben und Prüfschritt im gerenderten Kurs bedienbar, ohne Papier
+  oder externe Entwicklungsumgebung zu benötigen?
 
 ## Abhängigkeiten
 
@@ -52,7 +88,7 @@ gezielte Übersetzungs- oder Änderungsaufgabe. Für alle in PY2 aufgeführten
 Operationen wird ein kleiner diagnostischer Aufgabenpool benötigt; das einzelne
 Divisionsbeispiel deckt dieses Ziel nicht vollständig ab.
 
-**Evidenz und Anpassung:** Getrennte Zustands- und Ausgabeprotokolle.
+**Evidenz und Anpassung:** Getrennte Speicher- und Ausgabeprotokolle.
 Bei Lücken kurze passende Sicherung, nicht automatisch ein vollständiger
 Grundlagenblock. Snap!-Reporter und eigene Blöcke nur als Anschluss nutzen,
 wenn die tatsächliche Erfahrung erhoben wurde.
@@ -71,12 +107,12 @@ Reduktionspfeil, mathematische Definition, Python-Definition und Aufruf trennen.
 Für `f(x) = x² + 1` den verschachtelten Aufruf `f(1 + f(2))` auswerten.
 Einen Aufruf mit unbekanntem Namen begründet als fehlerhaft einordnen.
 
-**Aktivität:** Kurzer Modellimpuls, individuelle Reduktionsspur,
+**Aktivität:** Kurzer Modellimpuls, individuelles Auswertungsprotokoll,
 Begründungsvergleich und Übertragung einer reinen Funktion nach Python.
 Erst anschliessend Ausführung zur Prüfung.
 
 **Evidenz und Anpassung:** Argumente werden vor dem äusseren Rumpf ausgewertet;
-umgebende Rechnungen bleiben erhalten. Bei Verwechslungen zunächst einfache
+umgebende Ausdrücke bleiben erhalten. Bei Verwechslungen zunächst einfache
 Einzelaufrufe nutzen. Der reine Teilbereich muss ausdrücklich benannt werden,
 damit die folgende Erweiterung nicht wie ein Widerspruch erscheint.
 
@@ -86,9 +122,10 @@ damit die folgende Erweiterung nicht wie ein Widerspruch erscheint.
 
 **Voraussetzungen:** A1; Verzweigungen und Zuweisungen aus A0.
 
-**Modellarbeit:** M3 ergänzt M2 um getrennte Aufrufrahmen, Anweisungen,
-Fortsetzungen und Ausgabe. Reine Beispiele müssen in beiden Ansichten
-dasselbe Resultat haben.
+**Modellarbeit:** M3 ergänzt M2 um am Aufrufort eingeblendete Rümpfe mit
+eigenen lokalen Speichern, Anweisungen und Ausgabe. Der umgebende Ausdruck
+bleibt mit bereits ausgewerteten Teilwerten sichtbar. Reine Beispiele
+müssen in beiden Ansichten dasselbe Resultat haben.
 
 **Diagnose:** Eine ausgebende Funktion ohne explizite Rückgabe in `f(3) + 1`
 verfolgen; zwei Aufrufe mit demselben Parameternamen vergleichen;
@@ -105,8 +142,13 @@ prüft die Links-nach-rechts-Reihenfolge.
 Argumentanzahl unterscheiden. Bei Fehlern wird die betreffende Regel geklärt,
 nicht nur das Programm repariert.
 
-**Übergangskriterium:** Schüler:innen können lokale Variablenwerte und die wartende
-Rechnung darstellen und `return` erklären, ohne es als Ausgabe zu beschreiben.
+**Übergangskriterium:** Schüler:innen können lokale Variablenwerte dem
+eingeblendeten Aufruf zuordnen und diesen durch seinen Rückgabewert ersetzen.
+Sie erklären `return`, ohne es als Ausgabe zu beschreiben.
+Bei Schleifen stellen sie erneut benötigten Code wieder her, behalten
+aber die aktuellen Speicherwerte und Ausgaben bei. Die genauen Regeln
+für `while` und `for` stehen in der
+[Didaktik](lecture-didactics.md#ausdrücke-auswerten-anweisungen-ausführen).
 
 ## A3 — Das Design-Rezept an vollständigen Zwischenständen
 
