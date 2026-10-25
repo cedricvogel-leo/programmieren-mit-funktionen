@@ -3,7 +3,7 @@ author:   Cedric Vogel
 version:  1.0.0
 language: de
 
-comment:  Eine interaktive Lerneinheit zu Funktionen in Python.
+comment:  Eine interaktive Lerneinheit zu Funktionen in Python. Test
 
 import: https://raw.githubusercontent.com/cedricvogel-leo/glpython-liascript/main/README.md
 -->
