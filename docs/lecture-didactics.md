@@ -771,7 +771,7 @@ Kombinieren oder Ändern entschieden.
 ## Rolle von LiaScript und GLPython
 
 LiaScript soll später Vorhersagen, Erklärungen, Code und Rückmeldung verbinden.
-Das [GLPython-Makro](https://github.com/cedricvogel-leo/glpython-liascript)
+Das [GLPython-Makro](https://github.com/glpython-edu/glpython-liascript)
 stellt Ausführung, Visualisierung und Turtle-Einbettung bereit.
 Es ist ein Prüfwerkzeug, nicht die Definition der notionalen Maschine.
 
