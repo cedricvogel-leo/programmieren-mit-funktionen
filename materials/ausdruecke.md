@@ -1,6 +1,6 @@
 <!--
 author:   Cedric Vogel
-version:  1.0.0
+version:  1.0.1
 language: de
 
 comment:  Ausdrücke, Auswertung und vorgegebene Speicher: vorhersagen, erklären und mit Python prüfen.
