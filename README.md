@@ -1,6 +1,6 @@
 <!--
 author:   Cedric Vogel
-version:  0.1.0
+version:  1.0.0
 language: de
 
 comment:  Eine interaktive Lerneinheit zu Funktionen in Python.
