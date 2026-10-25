@@ -1,11 +1,11 @@
 <!--
 author:   Cedric Vogel
-version:  1.0.0
+version:  1.0.1
 language: de
 
 comment:  Ausdrücke, Auswertung und vorgegebene Speicher: vorhersagen, erklären und mit Python prüfen.
 
-import: https://raw.githubusercontent.com/cedricvogel-leo/glpython-liascript/main/README.md
+import: https://raw.githubusercontent.com/glpython-edu/glpython-liascript/main/README.md
 -->
 
 # Ausdrücke — Schritt für Schritt zum Wert

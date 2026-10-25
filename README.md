@@ -1,11 +1,11 @@
 <!--
 author:   Cedric Vogel
-version:  1.0.0
+version:  1.0.1
 language: de
 
 comment:  Eine interaktive Lerneinheit zu Funktionen in Python. Test
 
-import: https://raw.githubusercontent.com/cedricvogel-leo/glpython-liascript/main/README.md
+import: https://raw.githubusercontent.com/glpython-edu/glpython-liascript/main/README.md
 -->
 
 # Programmieren mit Funktionen
@@ -30,7 +30,7 @@ Text lesen; die interaktiven Python-Beispiele funktionieren im Reader.
 3. Nutzen Sie die schrittweise Visualisierung, um Ihre Vorhersage zu prüfen.
 4. Ändern Sie den Code und erklären Sie die Auswirkungen.
 
-Python läuft über [GLPython](https://github.com/cedricvogel-leo/glpython-liascript)
+Python läuft über [GLPython](https://github.com/glpython-edu/glpython-liascript)
 im Browser. Eine lokale Python-Installation ist dafür nicht nötig; zum Laden des
 Readers, des Makros und der Laufzeit benötigen Sie eine Internetverbindung.
 Jeder Codeblock hat eine eigene Laufzeit. Deshalb enthalten die Beispiele alle
